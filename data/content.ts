@@ -32,6 +32,7 @@ export const sections: TimelineSection[] = [
         subtitle: "iOS TESTING TOOL",
         type: "project",
         year: 2025,
+        slug: "qckfx",
       },
       {
         title: "Open Source Coding Agent",

@@ -11,9 +11,10 @@ export function WorkItem({ item }: { item: WorkItemType }) {
     </div>
   );
 
-  if (item.type === "post" && item.slug) {
+  if (item.slug) {
+    const href = item.type === "post" ? `/blog/${item.slug}` : `/projects/${item.slug}`;
     return (
-      <Link href={`/blog/${item.slug}`} className="block no-underline">
+      <Link href={href} className="block no-underline">
         {content}
       </Link>
     );

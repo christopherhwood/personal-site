@@ -227,6 +227,30 @@
     filter: url(#ink-bleed);
     transition: filter 0.5s ease;
   }
+
+  /* Project Detail Sidebar */
+  .project-sidebar {
+    position: relative;
+    border-top: 1px solid rgba(227, 224, 212, 0.1);
+    padding-top: 40px;
+    margin-top: 40px;
+  }
+
+  @media (min-width: 900px) {
+    .project-sidebar {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+
+  /* Project Hero mobile padding override */
+  @media (max-width: 899px) {
+    .project-hero {
+      padding-left: 5% !important;
+      padding-right: 5% !important;
+    }
+  }
 }
 
 @keyframes grainShift {
