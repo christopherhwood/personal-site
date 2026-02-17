@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Space_Mono } from "next/font/google";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -17,7 +18,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Christopher H. Wood",
+  title: "Chris Wood",
   description:
     "Curious engineer building at the intersection of AI and developer tools.",
 };
@@ -32,7 +33,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${spaceMono.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
