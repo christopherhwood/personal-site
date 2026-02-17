@@ -176,7 +176,7 @@ const projects: ProjectDetail[] = [
       "Dictionary lookup with MDBG and Baidu",
       "Automated tweet thread generator for growth",
     ],
-    siteUrl: "https://www.earlyworm.io",
+    siteUrl: "https://web.archive.org/web/20240817215718/http://www.earlyworm.io/",
     siteLabel: "earlyworm.io",
     links: [{ url: "/projects/earlyworm-v1", label: "Earlyworm v1 (2015)" }],
     asides: [
@@ -212,13 +212,6 @@ const projects: ProjectDetail[] = [
         label: "Demo",
         aspectRatio: "1170/2532",
         caption: "Browsing trending topics, reading AI-rewritten articles, and discovering content matched to your proficiency level.",
-      },
-      {
-        type: "image",
-        src: "/images/projects/earlyworm-v1/app-screenshot.jpg",
-        label: "Article Feed",
-        aspectRatio: "1125/2226",
-        caption: "Reading a Chinese news article with source cards and bookmarking.",
       },
       {
         type: "image",
@@ -269,6 +262,13 @@ const projects: ProjectDetail[] = [
         label: "Demo",
         aspectRatio: "16/9",
         caption: "Earlyworm demo showing the article discovery and reading experience.",
+      },
+      {
+        type: "image",
+        src: "/images/projects/earlyworm-v1/app-screenshot.jpg",
+        label: "Article Feed",
+        aspectRatio: "1125/2226",
+        caption: "Reading a Chinese news article with source cards and bookmarking.",
       },
     ],
   },
