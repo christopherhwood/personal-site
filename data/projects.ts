@@ -204,6 +204,13 @@ const projects: ProjectDetail[] = [
         aspectRatio: "750/1334",
         caption: "Reading an article with inline dictionary lookup and text-to-speech.",
       },
+      {
+        type: "image",
+        src: "/images/projects/earlyworm-app-screenshot.jpg",
+        label: "Article Feed",
+        aspectRatio: "1125/2226",
+        caption: "Reading a Chinese news article with source cards and bookmarking.",
+      },
     ],
     gallery: [
       {
@@ -262,13 +269,6 @@ const projects: ProjectDetail[] = [
         label: "Demo",
         aspectRatio: "16/9",
         caption: "Earlyworm demo showing the article discovery and reading experience.",
-      },
-      {
-        type: "image",
-        src: "/images/projects/earlyworm-v1/app-screenshot.jpg",
-        label: "Article Feed",
-        aspectRatio: "1125/2226",
-        caption: "Reading a Chinese news article with source cards and bookmarking.",
       },
     ],
   },
