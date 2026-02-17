@@ -14,7 +14,7 @@ const filters: { label: string; value: FilterType }[] = [
 
 export function FilterNav({ filter, setFilter }: Props) {
   return (
-    <nav className="fixed top-[60px] right-[60px] z-[100] hidden desktop:flex gap-[30px]">
+    <nav className="fixed top-[20px] right-[20px] desktop:top-[60px] desktop:right-[60px] z-[100] flex gap-[20px] desktop:gap-[30px]">
       {filters.map((f) => (
         <button
           key={f.value}

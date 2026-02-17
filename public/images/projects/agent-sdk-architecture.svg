@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" fill="none">
+  <style>
+    text { font-family: 'Space Mono', 'SF Mono', 'Consolas', monospace; }
+    .label { fill: #E3E0D4; font-size: 11px; letter-spacing: 0.08em; }
+    .label-sm { fill: #999; font-size: 9px; letter-spacing: 0.06em; }
+    .label-lg { fill: #E3E0D4; font-size: 13px; font-weight: bold; letter-spacing: 0.1em; }
+    .box { fill: none; stroke: rgba(227,224,212,0.15); stroke-width: 1; rx: 4; }
+    .box-filled { fill: rgba(227,224,212,0.04); stroke: rgba(227,224,212,0.15); stroke-width: 1; rx: 4; }
+    .box-accent { fill: rgba(227,224,212,0.08); stroke: rgba(227,224,212,0.25); stroke-width: 1; rx: 4; }
+    .line { stroke: rgba(227,224,212,0.2); stroke-width: 1; }
+    .line-dashed { stroke: rgba(227,224,212,0.15); stroke-width: 1; stroke-dasharray: 4 3; }
+    .arrow { fill: rgba(227,224,212,0.3); }
+  </style>
+
+  <!-- Background -->
+  <rect width="800" height="480" fill="#111111" rx="6"/>
+
+  <!-- LLM Provider (top) -->
+  <rect x="290" y="24" width="220" height="44" class="box-accent"/>
+  <text x="400" y="51" text-anchor="middle" class="label-lg">LLM PROVIDER</text>
+
+  <!-- Arrow down from LLM to Agent -->
+  <line x1="400" y1="68" x2="400" y2="100" class="line"/>
+  <polygon points="394,96 406,96 400,104" class="arrow"/>
+
+  <!-- Agent Core -->
+  <rect x="240" y="104" width="320" height="52" class="box-accent"/>
+  <text x="400" y="127" text-anchor="middle" class="label-lg">AGENT</text>
+  <text x="400" y="143" text-anchor="middle" class="label-sm">session management / permission system / context</text>
+
+  <!-- Hooks callout (right of agent) -->
+  <line x1="560" y1="130" x2="620" y2="130" class="line-dashed"/>
+  <rect x="620" y="108" width="160" height="44" class="box-filled"/>
+  <text x="700" y="127" text-anchor="middle" class="label">LIFECYCLE HOOKS</text>
+  <text x="700" y="141" text-anchor="middle" class="label-sm">before / after each tool</text>
+
+  <!-- Arrow down from Agent to Tool Registry -->
+  <line x1="400" y1="156" x2="400" y2="186" class="line"/>
+  <polygon points="394,182 406,182 400,190" class="arrow"/>
+
+  <!-- Tool Registry -->
+  <rect x="200" y="190" width="400" height="44" class="box-filled"/>
+  <text x="400" y="217" text-anchor="middle" class="label-lg">TOOL REGISTRY</text>
+
+  <!-- Tools row -->
+  <!-- Built-in tools -->
+  <line x1="280" y1="234" x2="280" y2="262" class="line"/>
+  <polygon points="274,258 286,258 280,266" class="arrow"/>
+
+  <rect x="180" y="266" width="200" height="80" class="box-filled"/>
+  <text x="280" y="286" text-anchor="middle" class="label">BUILT-IN TOOLS</text>
+  <text x="280" y="302" text-anchor="middle" class="label-sm">bash, file_read, file_write,</text>
+  <text x="280" y="314" text-anchor="middle" class="label-sm">file_edit, grep, glob, ls</text>
+  <text x="280" y="330" text-anchor="middle" class="label-sm">+ createTool() for custom</text>
+
+  <!-- Sub-agent tools -->
+  <line x1="520" y1="234" x2="520" y2="262" class="line"/>
+  <polygon points="514,258 526,258 520,266" class="arrow"/>
+
+  <rect x="420" y="266" width="200" height="80" class="box-filled"/>
+  <text x="520" y="286" text-anchor="middle" class="label">SUB-AGENT TOOLS</text>
+  <text x="520" y="302" text-anchor="middle" class="label-sm">nested Agent instances</text>
+  <text x="520" y="314" text-anchor="middle" class="label-sm">own model, tools, prompt</text>
+  <text x="520" y="330" text-anchor="middle" class="label-sm">invoked like any other tool</text>
+
+  <!-- Arrow down to Execution Adapter -->
+  <line x1="400" y1="346" x2="400" y2="372" class="line"/>
+  <polygon points="394,368 406,368 400,376" class="arrow"/>
+
+  <!-- Execution Adapter Interface -->
+  <rect x="200" y="376" width="400" height="36" class="box-accent"/>
+  <text x="400" y="399" text-anchor="middle" class="label-lg">EXECUTION ADAPTER</text>
+
+  <!-- Three adapters -->
+  <line x1="266" y1="412" x2="266" y2="432" class="line"/>
+  <polygon points="260,428 272,428 266,436" class="arrow"/>
+
+  <line x1="400" y1="412" x2="400" y2="432" class="line"/>
+  <polygon points="394,428 406,428 400,436" class="arrow"/>
+
+  <line x1="534" y1="412" x2="534" y2="432" class="line"/>
+  <polygon points="528,428 540,428 534,436" class="arrow"/>
+
+  <rect x="196" y="436" width="140" height="32" class="box"/>
+  <text x="266" y="457" text-anchor="middle" class="label">LOCAL</text>
+
+  <rect x="350" y="436" width="100" height="32" class="box"/>
+  <text x="400" y="457" text-anchor="middle" class="label">DOCKER</text>
+
+  <rect x="464" y="436" width="140" height="32" class="box"/>
+  <text x="534" y="457" text-anchor="middle" class="label">E2B SANDBOX</text>
+
+  <!-- Left sidebar: createTool hint -->
+  <rect x="16" y="266" width="148" height="80" class="box"/>
+  <text x="90" y="286" text-anchor="middle" class="label">YOUR TOOLS</text>
+  <text x="90" y="304" text-anchor="middle" class="label-sm">define ToolConfig</text>
+  <text x="90" y="316" text-anchor="middle" class="label-sm">+ execute function</text>
+  <text x="90" y="330" text-anchor="middle" class="label-sm">register with agent</text>
+  <line x1="164" y1="306" x2="180" y2="306" class="line-dashed"/>
+
+</svg>

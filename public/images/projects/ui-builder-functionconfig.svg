@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 360" fill="none">
+  <style>
+    text { font-family: 'SF Mono', 'Fira Code', monospace; }
+    .label { font-size: 10px; fill: #a09882; text-transform: uppercase; letter-spacing: 0.1em; }
+    .body { font-size: 11px; fill: #a09882; }
+    .accent { fill: #e3e0d4; opacity: 0.9; }
+    .highlight { fill: #e3e0d4; font-weight: 600; }
+    .box { fill: rgba(227,224,212,0.03); stroke: rgba(227,224,212,0.15); stroke-width: 1; rx: 4; }
+    .box-hl { fill: rgba(227,224,212,0.06); stroke: rgba(227,224,212,0.25); stroke-width: 1.5; rx: 4; }
+    .arrow { stroke: rgba(227,224,212,0.3); stroke-width: 1.5; fill: none; marker-end: url(#a); }
+    .divider { stroke: rgba(227,224,212,0.1); stroke-width: 1; }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="rgba(227,224,212,0.3)" />
+    </marker>
+  </defs>
+
+  <!-- Left column: What the model writes -->
+  <rect class="box-hl" x="30" y="20" width="280" height="280" />
+  <text class="label" x="170" y="44" text-anchor="middle">What the model writes</text>
+
+  <text class="body" x="55" y="72">textcontent: {</text>
+  <text class="accent" x="70" y="94">contextId: "1",</text>
+  <text class="accent" x="70" y="114">selector: ["count"],</text>
+  <text class="accent" x="70" y="134">body: "return</text>
+  <text class="accent" x="80" y="154">args[0].toString();"</text>
+  <text class="body" x="55" y="174">}</text>
+
+  <line class="divider" x1="55" y1="192" x2="285" y2="192" />
+
+  <text class="body" x="55" y="216">onClick: dispatch(</text>
+  <text class="accent" x="70" y="236">"increment", null</text>
+  <text class="body" x="55" y="256">)</text>
+
+  <line class="divider" x1="55" y1="272" x2="285" y2="272" />
+
+  <text class="body" x="170" y="294" text-anchor="middle" style="font-size: 10px; fill: #a09882">Just data references + tiny</text>
+  <text class="body" x="170" y="308" text-anchor="middle" style="font-size: 10px; fill: #a09882">function bodies. No syntax</text>
+  <text class="body" x="170" y="322" text-anchor="middle" style="font-size: 10px; fill: #a09882">to get wrong.</text>
+
+  <!-- Arrow between columns -->
+  <path class="arrow" d="M 310 160 L 380 160" />
+
+  <!-- Right column: What the runtime handles -->
+  <rect class="box" x="390" y="20" width="280" height="280" />
+  <text class="label" x="530" y="44" text-anchor="middle">What the runtime handles</text>
+
+  <text class="accent" x="415" y="72">Resolve state references</text>
+  <text class="body" x="430" y="92">id "1" &#8594; Counter provider</text>
+  <text class="body" x="430" y="112">["count"] &#8594; state.count</text>
+
+  <line class="divider" x1="415" y1="128" x2="645" y2="128" />
+
+  <text class="accent" x="415" y="150">Inject values into args</text>
+  <text class="body" x="430" y="170">args[0] = 42</text>
+
+  <line class="divider" x1="415" y1="186" x2="645" y2="186" />
+
+  <text class="accent" x="415" y="208">Execute function body</text>
+  <text class="body" x="430" y="228">new Function(body)(args)</text>
+  <text class="body" x="430" y="248">&#8594; "42"</text>
+
+  <line class="divider" x1="415" y1="264" x2="645" y2="264" />
+
+  <text class="body" x="530" y="286" text-anchor="middle" style="font-size: 10px; fill: #a09882">All boilerplate, tree insertion,</text>
+  <text class="body" x="530" y="300" text-anchor="middle" style="font-size: 10px; fill: #a09882">and state wiring handled by</text>
+  <text class="body" x="530" y="314" text-anchor="middle" style="font-size: 10px; fill: #a09882">code, not the model.</text>
+
+  <!-- Bottom takeaway -->
+  <rect class="box" x="100" y="320" width="500" height="30" />
+  <text class="body" x="350" y="340" text-anchor="middle">The model focuses on intent. The runtime handles everything that could break.</text>
+</svg>

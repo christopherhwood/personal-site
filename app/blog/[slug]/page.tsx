@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 function renderInlineFormatting(text: string): React.ReactNode[] {
-  const parts = text.split(/(\*[^*]+\*|`[^`]+`)/g);
+  const parts = text.split(/(\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
   return parts.map((part, i) => {
     if (part.startsWith("*") && part.endsWith("*")) {
       return (
@@ -41,6 +41,20 @@ function renderInlineFormatting(text: string): React.ReactNode[] {
         <span key={i} className="code-inline">
           {part.slice(1, -1)}
         </span>
+      );
+    }
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={i}
+          href={linkMatch[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors"
+        >
+          {linkMatch[1]}
+        </a>
       );
     }
     return part;

@@ -8,6 +8,13 @@ export interface WorkItem {
   slug?: string;
 }
 
+export interface FeaturedProject {
+  title: string;
+  subtitle: string;
+  description: string;
+  slug?: string;
+}
+
 export interface TimelineSection {
   id: string;
   yearRange: string;
@@ -16,6 +23,38 @@ export interface TimelineSection {
   bodyTexts: string[];
   items: WorkItem[];
 }
+
+export const featuredProjects: FeaturedProject[] = [
+  {
+    title: "AI Website Builder",
+    subtitle: "DRAG/DROP / META-PROGRAMMING",
+    description: "Drag-and-drop site builder where an LLM writes the state management code.",
+    slug: "ui-builder",
+  },
+  {
+    title: "ARC-AGI Research",
+    subtitle: "DIFFUSION MODELS / INDEPENDENT",
+    description: "Independent research exploring diffusion models for abstract reasoning tasks.",
+  },
+  {
+    title: "qckfx",
+    subtitle: "iOS TESTING TOOL",
+    description: "Record-and-replay UI testing for iOS apps, built for AI coding agents.",
+    slug: "qckfx",
+  },
+  {
+    title: "Earlyworm",
+    subtitle: "LANGUAGE LEARNING / iOS",
+    description: "AI-powered language learning iOS app built while still at Meta.",
+    slug: "earlyworm",
+  },
+  {
+    title: "Coding Agent",
+    subtitle: "AI / DEVELOPER TOOLS",
+    description: "Node.js autonomous coding agent with tool use and multi-step planning.",
+    slug: "agent-sdk",
+  },
+];
 
 export const sections: TimelineSection[] = [
   {
@@ -39,24 +78,28 @@ export const sections: TimelineSection[] = [
         subtitle: "AI / DEVELOPER TOOLS",
         type: "project",
         year: 2025,
+        slug: "agent-sdk",
       },
       {
         title: "Node.js Debugging MCP",
         subtitle: "MCP SERVER / DEVELOPER TOOLS",
         type: "project",
         year: 2025,
+        slug: "node-debugger-mcp",
       },
       {
         title: "Tree-sitter MCP",
         subtitle: "MCP SERVER / CODE ANALYSIS",
         type: "project",
         year: 2025,
+        slug: "tree-hugger",
       },
       {
         title: "Writeframe",
         subtitle: "SHORT FORM PUBLISHING / iOS",
         type: "project",
         year: 2025,
+        slug: "writeframe",
       },
       {
         title: "Open-Sourcing All of My Projects from 2024",
@@ -82,24 +125,28 @@ export const sections: TimelineSection[] = [
         subtitle: "LANGUAGE LEARNING / iOS",
         type: "project",
         year: 2023,
+        slug: "earlyworm",
       },
       {
         title: "AI Website Builder",
-        subtitle: "DRAG/DROP / AUTO FUNCTIONS",
+        subtitle: "DRAG/DROP / META-PROGRAMMING",
         type: "project",
         year: 2024,
+        slug: "ui-builder",
       },
       {
         title: "Component Builder",
         subtitle: "FRONTEND / AI-POWERED",
         type: "project",
         year: 2024,
+        slug: "component-builder",
       },
       {
         title: "Ecommerce Ad Generator",
         subtitle: "AI / MARKETING",
         type: "project",
         year: 2024,
+        slug: "qckfx-ads",
       },
       {
         title: "ARC-AGI Research",
@@ -230,10 +277,11 @@ export const sections: TimelineSection[] = [
     ],
     items: [
       {
-        title: "First App",
-        subtitle: "iOS / LEARNING",
+        title: "Earlyworm v1",
+        subtitle: "CHINESE E-READER / iOS",
         type: "project",
-        year: 2014,
+        year: 2015,
+        slug: "earlyworm",
       },
       {
         title: "2 Seconds",

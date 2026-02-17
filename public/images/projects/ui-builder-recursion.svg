@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 360" fill="none">
+  <style>
+    text { font-family: 'SF Mono', 'Fira Code', monospace; }
+    .label { font-size: 10px; fill: #a09882; text-transform: uppercase; letter-spacing: 0.1em; }
+    .code { font-size: 10.5px; fill: #a09882; }
+    .code-hl { font-size: 10.5px; fill: #e3e0d4; opacity: 0.85; }
+    .accent { font-size: 11px; fill: #e3e0d4; opacity: 0.9; }
+    .sm { font-size: 9.5px; fill: #a09882; }
+    .box { fill: rgba(227,224,212,0.03); stroke: rgba(227,224,212,0.15); stroke-width: 1; rx: 4; }
+    .box-hl { fill: rgba(227,224,212,0.06); stroke: rgba(227,224,212,0.25); stroke-width: 1.5; rx: 4; }
+    .box-provider { fill: rgba(227,224,212,0.04); stroke: rgba(227,224,212,0.2); stroke-width: 1; rx: 4; stroke-dasharray: 6 3; }
+    .line { stroke: rgba(227,224,212,0.2); stroke-width: 1; }
+    .arrow { stroke: rgba(227,224,212,0.3); stroke-width: 1.5; fill: none; marker-end: url(#a); }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="rgba(227,224,212,0.3)" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text class="label" x="370" y="18" text-anchor="middle">Recursive rendering: JSON config → React components</text>
+
+  <!-- Left: JSON config tree -->
+  <rect class="box" x="20" y="34" width="230" height="306" />
+  <text class="label" x="135" y="56" text-anchor="middle">Config Tree (JSON)</text>
+
+  <text class="code" x="40" y="82">{ id: "root",</text>
+  <text class="code" x="50" y="96">type: "div" }</text>
+
+  <text class="code" x="50" y="124">{ id: "1",</text>
+  <text class="code-hl" x="60" y="140">actions: [...],</text>
+  <text class="code-hl" x="60" y="156">initialState:</text>
+  <text class="code-hl" x="70" y="172">{ count: 0 }</text>
+  <text class="code" x="50" y="188">}</text>
+
+  <text class="code" x="60" y="216">{ id: "2",</text>
+  <text class="code" x="70" y="232">type: "button",</text>
+  <text class="code" x="70" y="248">text: "-" }</text>
+
+  <text class="code" x="60" y="274">{ id: "3",</text>
+  <text class="code" x="70" y="290">type: "label" }</text>
+
+  <text class="code" x="60" y="316">{ id: "4",</text>
+  <text class="code" x="70" y="332">type: "button",</text>
+
+  <!-- Arrow left to middle -->
+  <path class="arrow" d="M 250 190 L 296 190" />
+  <text class="sm" x="273" y="183" text-anchor="middle">each node</text>
+
+  <!-- Middle: DynamicElement -->
+  <rect class="box-hl" x="306" y="120" width="150" height="140" />
+  <text class="label" x="381" y="144" text-anchor="middle">DynamicElement</text>
+
+  <text class="sm" x="322" y="172">has actions?</text>
+  <text class="code-hl" x="332" y="189">&#8594; DynamicProvider</text>
+
+  <text class="sm" x="322" y="216">has type?</text>
+  <text class="code-hl" x="332" y="233">&#8594; DynamicComponent</text>
+
+  <!-- Arrow middle to right -->
+  <path class="arrow" d="M 456 190 L 496 190" />
+
+  <!-- Right: Rendered output -->
+  <rect class="box" x="506" y="34" width="214" height="306" />
+  <text class="label" x="613" y="56" text-anchor="middle">Rendered Output</text>
+
+  <!-- div -->
+  <rect class="box" x="530" y="72" width="166" height="32" />
+  <text class="accent" x="613" y="93" text-anchor="middle">&lt;div&gt;</text>
+
+  <!-- Provider wrapper -->
+  <rect class="box-provider" x="522" y="118" width="182" height="208" />
+  <text class="sm" x="613" y="138" text-anchor="middle" style="fill: rgba(227,224,212,0.45)">Context.Provider</text>
+  <text class="sm" x="613" y="152" text-anchor="middle" style="fill: rgba(227,224,212,0.35)">{count: 0, dispatch}</text>
+
+  <line class="line" x1="613" y1="104" x2="613" y2="118" />
+
+  <!-- - button -->
+  <rect class="box" x="540" y="168" width="146" height="32" />
+  <text class="accent" x="613" y="189" text-anchor="middle">&lt;button&gt; -</text>
+
+  <!-- label -->
+  <rect class="box" x="540" y="214" width="146" height="32" />
+  <text class="accent" x="613" y="235" text-anchor="middle">&lt;label&gt; 0</text>
+
+  <!-- + button -->
+  <rect class="box" x="540" y="260" width="146" height="32" />
+  <text class="accent" x="613" y="281" text-anchor="middle">&lt;button&gt; +</text>
+
+  <!-- Recursion arrow -->
+  <path d="M 381 260 C 381 310, 381 340, 320 340 C 265 340, 265 310, 265 200" class="arrow" style="stroke-dasharray: 4 4" />
+  <text class="sm" x="290" y="330">children recurse</text>
+
+</svg>

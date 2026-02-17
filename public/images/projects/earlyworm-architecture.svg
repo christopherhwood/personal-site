@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" fill="none">
+  <style>
+    text { font-family: 'SF Mono', 'Menlo', monospace; }
+    .title { font-size: 11px; fill: #E3E0D4; font-weight: 600; }
+    .subtitle { font-size: 8px; fill: #999; }
+    .label { font-size: 7px; fill: #888; letter-spacing: 0.5px; }
+    .arrow { stroke: #444; stroke-width: 1; fill: none; marker-end: url(#arrowhead); }
+    .arrow-data { stroke: #5a6; stroke-width: 1; fill: none; marker-end: url(#arrowhead-green); }
+    .box { rx: 4; ry: 4; }
+    .group-border { stroke: #333; stroke-width: 1; stroke-dasharray: 4 3; fill: none; rx: 6; ry: 6; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#444"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#5a6"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="720" fill="#111111"/>
+
+  <!-- Section: Data Ingestion (left) -->
+  <rect x="20" y="60" width="260" height="280" class="group-border"/>
+  <text x="32" y="52" class="label">DATA INGESTION</text>
+
+  <!-- RSS Fetcher -->
+  <rect x="40" y="80" width="220" height="44" class="box" fill="#1a2a1a"/>
+  <text x="150" y="100" class="title" text-anchor="middle">RSS Fetcher</text>
+  <text x="150" y="114" class="subtitle" text-anchor="middle">Blue/Green Deploy · Node.js</text>
+
+  <!-- Article Processor -->
+  <rect x="40" y="140" width="220" height="44" class="box" fill="#1a2a1a"/>
+  <text x="150" y="160" class="title" text-anchor="middle">Article Processor</text>
+  <text x="150" y="174" class="subtitle" text-anchor="middle">Classification · NER · Embeddings</text>
+
+  <!-- Sub-services row -->
+  <rect x="40" y="200" width="68" height="36" class="box" fill="#1a1a2a"/>
+  <text x="74" y="218" class="title" text-anchor="middle" font-size="9">Classifier</text>
+  <text x="74" y="228" class="subtitle" text-anchor="middle" font-size="6">17 categories</text>
+
+  <rect x="116" y="200" width="68" height="36" class="box" fill="#1a1a2a"/>
+  <text x="150" y="218" class="title" text-anchor="middle" font-size="9">NER</text>
+  <text x="150" y="228" class="subtitle" text-anchor="middle" font-size="6">PER/ORG/LOC</text>
+
+  <rect x="192" y="200" width="68" height="36" class="box" fill="#1a1a2a"/>
+  <text x="226" y="218" class="title" text-anchor="middle" font-size="9">Embedder</text>
+  <text x="226" y="228" class="subtitle" text-anchor="middle" font-size="6">OpenAI API</text>
+
+  <!-- Trends Service -->
+  <rect x="40" y="260" width="220" height="60" class="box" fill="#2a1a2a"/>
+  <text x="150" y="280" class="title" text-anchor="middle">Trends Service</text>
+  <text x="150" y="294" class="subtitle" text-anchor="middle">CronJob · Every 6h</text>
+  <text x="150" y="306" class="subtitle" text-anchor="middle">TF-IDF Clustering · LDA · TextRank</text>
+
+  <!-- Arrows: ingestion flow -->
+  <line x1="150" y1="124" x2="150" y2="140" class="arrow-data"/>
+  <line x1="74" y1="200" x2="74" y2="184" class="arrow"/>
+  <line x1="150" y1="200" x2="150" y2="184" class="arrow"/>
+  <line x1="226" y1="200" x2="226" y2="184" class="arrow"/>
+  <line x1="150" y1="240" x2="150" y2="260" class="arrow-data"/>
+
+  <!-- Section: Storage (center) -->
+  <rect x="310" y="60" width="200" height="280" class="group-border"/>
+  <text x="322" y="52" class="label">STORAGE</text>
+
+  <!-- MariaDB -->
+  <rect x="330" y="80" width="160" height="44" class="box" fill="#2a2a1a"/>
+  <text x="410" y="100" class="title" text-anchor="middle">MariaDB</text>
+  <text x="410" y="114" class="subtitle" text-anchor="middle">Articles · Users · Interactions</text>
+
+  <!-- Milvus -->
+  <rect x="330" y="140" width="160" height="44" class="box" fill="#2a2a1a"/>
+  <text x="410" y="160" class="title" text-anchor="middle">Milvus</text>
+  <text x="410" y="174" class="subtitle" text-anchor="middle">Vector DB · Embeddings Search</text>
+
+  <!-- Azure Blob -->
+  <rect x="330" y="200" width="160" height="44" class="box" fill="#2a2a1a"/>
+  <text x="410" y="220" class="title" text-anchor="middle">Azure Blob</text>
+  <text x="410" y="234" class="subtitle" text-anchor="middle">Pages · Thumbnails · Summaries</text>
+
+  <!-- Redis cluster -->
+  <rect x="330" y="260" width="160" height="60" class="box" fill="#2a1a1a"/>
+  <text x="410" y="280" class="title" text-anchor="middle">Redis (9 instances)</text>
+  <text x="410" y="294" class="subtitle" text-anchor="middle">DB Cache · Sessions · Rate Limit</text>
+  <text x="410" y="306" class="subtitle" text-anchor="middle">Rec Input · Read · RSS Jobs</text>
+
+  <!-- Arrows: ingestion → storage -->
+  <line x1="260" y1="102" x2="330" y2="102" class="arrow-data"/>
+  <line x1="260" y1="162" x2="330" y2="162" class="arrow-data"/>
+  <line x1="260" y1="290" x2="330" y2="220" class="arrow-data"/>
+
+  <!-- Section: Recommendation Engine (right-top) -->
+  <rect x="540" y="60" width="260" height="180" class="group-border"/>
+  <text x="552" y="52" class="label">RECOMMENDATION ENGINE</text>
+
+  <!-- Rec Input -->
+  <rect x="560" y="80" width="220" height="44" class="box" fill="#1a2a2a"/>
+  <text x="670" y="100" class="title" text-anchor="middle">Recommendation Input</text>
+  <text x="670" y="114" class="subtitle" text-anchor="middle">CronJob · User Vectors · Preferences</text>
+
+  <!-- Feed Recommender -->
+  <rect x="560" y="140" width="220" height="44" class="box" fill="#1a2a2a"/>
+  <text x="670" y="160" class="title" text-anchor="middle">Feed Recommender</text>
+  <text x="670" y="174" class="subtitle" text-anchor="middle">Flask · Vector Similarity · Ranking</text>
+
+  <!-- Personalization -->
+  <rect x="560" y="200" width="220" height="24" class="box" fill="#1a2a2a"/>
+  <text x="670" y="216" class="subtitle" text-anchor="middle">Content-based + Collaborative Filtering</text>
+
+  <!-- Arrows: storage → rec engine -->
+  <line x1="490" y1="162" x2="560" y2="162" class="arrow-data"/>
+  <line x1="490" y1="290" x2="540" y2="290" class="arrow"/>
+  <path d="M 540 290 L 540 100 L 560 100" class="arrow"/>
+
+  <!-- Rec flow -->
+  <line x1="670" y1="124" x2="670" y2="140" class="arrow-data"/>
+
+  <!-- Section: API Server (center-bottom) -->
+  <rect x="220" y="380" width="380" height="180" class="group-border"/>
+  <text x="232" y="372" class="label">API SERVER · NODE.JS / KOA</text>
+
+  <!-- Server box -->
+  <rect x="240" y="400" width="340" height="44" class="box" fill="#1a1a1a" stroke="#444" stroke-width="0.5"/>
+  <text x="410" y="420" class="title" text-anchor="middle">Main Server</text>
+  <text x="410" y="434" class="subtitle" text-anchor="middle">Blue/Green · Port 80 · Application Gateway</text>
+
+  <!-- API routes row -->
+  <rect x="240" y="460" width="80" height="30" class="box" fill="#222"/>
+  <text x="280" y="477" class="subtitle" text-anchor="middle" font-size="7">Articles</text>
+
+  <rect x="328" y="460" width="80" height="30" class="box" fill="#222"/>
+  <text x="368" y="477" class="subtitle" text-anchor="middle" font-size="7">Recommendations</text>
+
+  <rect x="416" y="460" width="68" height="30" class="box" fill="#222"/>
+  <text x="450" y="477" class="subtitle" text-anchor="middle" font-size="7">Trends</text>
+
+  <rect x="492" y="460" width="68" height="30" class="box" fill="#222"/>
+  <text x="526" y="477" class="subtitle" text-anchor="middle" font-size="7">Search</text>
+
+  <!-- Supporting services row -->
+  <rect x="240" y="510" width="105" height="30" class="box" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+  <text x="292" y="528" class="subtitle" text-anchor="middle">Email Service</text>
+
+  <rect x="355" y="510" width="105" height="30" class="box" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+  <text x="407" y="528" class="subtitle" text-anchor="middle">Notifications</text>
+
+  <rect x="470" y="510" width="105" height="30" class="box" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+  <text x="522" y="528" class="subtitle" text-anchor="middle">Logging</text>
+
+  <!-- Arrows: storage → server -->
+  <line x1="410" y1="340" x2="410" y2="400" class="arrow"/>
+
+  <!-- Arrow: rec engine → server -->
+  <path d="M 670 224 L 670 420 L 580 420" class="arrow"/>
+
+  <!-- Section: External APIs (right-bottom) -->
+  <rect x="660" y="380" width="280" height="180" class="group-border"/>
+  <text x="672" y="372" class="label">EXTERNAL SERVICES</text>
+
+  <rect x="680" y="400" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="740" y="418" class="title" text-anchor="middle" font-size="9">OpenAI API</text>
+
+  <rect x="808" y="400" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="868" y="418" class="title" text-anchor="middle" font-size="9">Baidu Translate</text>
+
+  <rect x="680" y="440" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="740" y="458" class="title" text-anchor="middle" font-size="9">Stripe</text>
+
+  <rect x="808" y="440" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="868" y="458" class="title" text-anchor="middle" font-size="9">Postmark</text>
+
+  <rect x="680" y="480" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="740" y="498" class="title" text-anchor="middle" font-size="9">LaunchDarkly</text>
+
+  <rect x="808" y="480" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="868" y="498" class="title" text-anchor="middle" font-size="9">Rollbar</text>
+
+  <rect x="680" y="520" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="740" y="538" class="title" text-anchor="middle" font-size="9">Microsoft TTS</text>
+
+  <rect x="808" y="520" width="120" height="30" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="868" y="538" class="title" text-anchor="middle" font-size="9">Azure Key Vault</text>
+
+  <!-- Arrow: server → external -->
+  <line x1="600" y1="420" x2="660" y2="420" class="arrow"/>
+
+  <!-- Section: iOS App (bottom) -->
+  <rect x="310" y="610" width="200" height="60" class="group-border"/>
+  <text x="322" y="602" class="label">CLIENT</text>
+
+  <rect x="330" y="624" width="160" height="36" class="box" fill="#2a2a2a" stroke="#555" stroke-width="0.5"/>
+  <text x="410" y="642" class="title" text-anchor="middle">iOS App</text>
+  <text x="410" y="654" class="subtitle" text-anchor="middle">Swift · UIKit</text>
+
+  <!-- Arrow: server ↔ iOS -->
+  <line x1="410" y1="560" x2="410" y2="624" class="arrow"/>
+
+  <!-- Section: Infrastructure (top-right corner) -->
+  <rect x="830" y="60" width="110" height="140" class="group-border"/>
+  <text x="842" y="52" class="label">INFRA</text>
+
+  <text x="885" y="82" class="title" text-anchor="middle" font-size="9">Azure AKS</text>
+  <text x="885" y="102" class="title" text-anchor="middle" font-size="9">Terraform</text>
+  <text x="885" y="122" class="title" text-anchor="middle" font-size="9">Azure ACR</text>
+  <text x="885" y="142" class="title" text-anchor="middle" font-size="9">App Gateway</text>
+  <text x="885" y="162" class="title" text-anchor="middle" font-size="9">VNet</text>
+  <text x="885" y="182" class="title" text-anchor="middle" font-size="9">Blue/Green</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="690" x2="70" y2="690" class="arrow-data"/>
+  <text x="78" y="693" class="subtitle">Data flow</text>
+  <line x1="160" y1="690" x2="190" y2="690" class="arrow"/>
+  <text x="198" y="693" class="subtitle">Service dependency</text>
+</svg>
