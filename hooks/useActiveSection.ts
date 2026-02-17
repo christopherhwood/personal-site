@@ -85,9 +85,9 @@ export function useActiveSection(sectionIds: string[]) {
 
   const [activeSection, setActiveSection] = useState(initialState.activeSection);
   const [progress, setProgress] = useState(initialState.progress);
-  const [isReady, setIsReady] = useState(
-    Boolean(sectionIds.length === 0 || hasRuntimeState)
-  );
+  // Even with a runtime snapshot, wait for scroll restoration to settle before
+  // rendering the active marker to avoid a visible flash to stale state.
+  const [isReady, setIsReady] = useState(Boolean(sectionIds.length === 0));
 
   useEffect(() => {
     const persistedState = hasRuntimeState ? null : loadState(sectionIds);
