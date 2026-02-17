@@ -92,7 +92,7 @@ export function Sidebar({ activeSection, progress, isReady }: Props) {
           })}
           <li className="mt-10">
             <a
-              href="mailto:contact@christopherhwood.com"
+              href="mailto:christopherhwood@gmail.com"
               className="font-mono text-[0.8rem] text-primary transition-opacity duration-300 hover:opacity-80 opacity-50"
             >
               Get in Touch ↗

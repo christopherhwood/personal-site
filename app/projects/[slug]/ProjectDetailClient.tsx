@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
-import type { ProjectDetail, MediaBlock, ProjectAside } from "@/data/projects";
+import type { ProjectDetail, MediaBlock, ProjectAside, ProjectSection } from "@/data/projects";
 import { BackLink } from "@/components/BackLink";
 
 function MediaRenderer({ block, className }: { block: MediaBlock; className?: string }) {
@@ -568,6 +568,57 @@ export function ProjectDetailClient({
               </div>
             </div>
           )}
+
+          {project.sections?.map((section, sIdx) => (
+            <div key={sIdx} className="mt-20 pt-10 border-t border-primary/10">
+              <h3 className="font-serif italic text-[1.8rem] leading-[1.2] mb-8 text-primary/90">
+                {section.title}
+              </h3>
+              <div className="max-w-[680px]">
+                {section.description.split("\n\n").map((p, pIdx) => (
+                  <p key={pIdx} className="font-mono text-[0.9rem] leading-[1.8] text-primary/80 mb-8">
+                    {p}
+                  </p>
+                ))}
+              </div>
+              {section.media && section.media.length > 0 && section.mediaLayout === "carousel" && (
+                <div className="mt-8">
+                  <div
+                    className="flex gap-4 overflow-x-auto overflow-y-hidden pb-4 snap-x snap-mandatory"
+                    style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(227,224,212,0.2) transparent" }}
+                  >
+                    {section.media.map((block, i) => (
+                      <div key={i} className="flex-none snap-start">
+                        <div style={{ height: "420px" }}>
+                          <MediaRenderer block={block} className="h-full w-auto rounded border border-primary/10" />
+                        </div>
+                        <p className="font-mono text-[0.65rem] text-muted mt-2">
+                          {block.label}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {section.media && section.media.length > 0 && section.mediaLayout !== "carousel" && (
+                <div className="mt-8 space-y-12">
+                  {section.media.map((block, i) => (
+                    <div key={i}>
+                      <div className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted mb-3">
+                        {block.label}
+                      </div>
+                      <MediaRenderer block={block} className="w-full rounded border border-primary/10" />
+                      {block.caption && (
+                        <p className="font-mono text-[0.7rem] text-muted mt-3">
+                          {block.caption}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </main>
       </div>
 

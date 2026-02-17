@@ -49,10 +49,10 @@ export const featuredProjects: FeaturedProject[] = [
     slug: "earlyworm",
   },
   {
-    title: "Coding Agent",
-    subtitle: "AI / DEVELOPER TOOLS",
-    description: "Node.js autonomous coding agent with tool use and multi-step planning.",
-    slug: "agent-sdk",
+    title: "DayDayCook",
+    subtitle: "TOP 10 HK 2016 / WWDC 2017 FEATURED",
+    description: "iOS team lead at Asia\u2019s premier cooking brand. Apps across iPhone, iPad, Apple TV, Apple Watch, and iMessage.",
+    slug: "daydaycook",
   },
 ];
 
@@ -226,20 +226,15 @@ export const sections: TimelineSection[] = [
     chapterLabel: "2015\u20132018 \u2014 DAYDAYCOOK",
     displayText: "2.5 years on the iOS team.",
     bodyTexts: [
-      "Worked on DayDayCook\u2019s iOS app. We made Apple\u2019s top 10 app list in Hong Kong in 2016 and were featured in the WWDC 2016 video. It was my first time seeing something I worked on reach that many people, and understanding what it takes to ship software that holds up at scale.",
+      "Worked on DayDayCook\u2019s iOS app. We made Apple\u2019s top 10 app list in Hong Kong in 2016 and were featured in the WWDC 2017 video. It was my first time seeing something I worked on reach that many people, and understanding what it takes to ship software that holds up at scale.",
     ],
     items: [
       {
         title: "DayDayCook",
-        subtitle: "TOP 10 HK 2016 / WWDC FEATURED",
+        subtitle: "TOP 10 HK 2016 / WWDC 2017 FEATURED",
         type: "project",
         year: 2016,
-      },
-      {
-        title: "iOS Development",
-        subtitle: "SWIFT / DESIGN / LOCALIZATION",
-        type: "project",
-        year: 2016,
+        slug: "daydaycook",
       },
       {
         title: "2017",
@@ -278,7 +273,7 @@ export const sections: TimelineSection[] = [
         subtitle: "CHINESE E-READER / iOS",
         type: "project",
         year: 2015,
-        slug: "earlyworm",
+        slug: "earlyworm-v1",
       },
       {
         title: "2 Seconds",

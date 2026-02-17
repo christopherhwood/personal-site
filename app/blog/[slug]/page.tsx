@@ -88,28 +88,18 @@ export default async function BlogPostPage({ params }: Props) {
       <GrainOverlay />
       <CustomCursor />
       <ReadingProgress />
+      <BackLink />
       <div className="site-wrapper">
         <aside className="sidebar">
           <div>
-            <div>
-              <Link
-                href="/"
-                className="no-underline"
-              >
-                <h1 className="font-serif italic text-[3rem] leading-[1.1]">
-                  CHW
-                </h1>
-              </Link>
-              <span className="font-mono text-[0.75rem] uppercase tracking-[0.1em] text-muted mt-2 block">
-                Curious Engineer
-              </span>
-            </div>
-
-            <div className="mt-10">
-              <BackLink className="font-mono text-primary/60 text-[0.8rem] hover:text-primary transition-colors">
-                &larr; Back to Stream
-              </BackLink>
-            </div>
+            <Link href="/" className="no-underline">
+              <h1 className="font-serif italic font-normal text-[3rem] leading-[1.1] mb-5 tracking-[-0.02em]">
+                CHW
+              </h1>
+            </Link>
+            <span className="font-mono text-[0.75rem] uppercase tracking-[0.1em] text-muted mt-[10px] block">
+              Curious Engineer
+            </span>
 
             {post.aboutText && (
               <div className="mt-12 hidden desktop:block">

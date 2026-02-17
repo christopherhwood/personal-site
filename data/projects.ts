@@ -27,6 +27,13 @@ export interface ProjectAside {
   collapsibles?: { label: string; content: string }[];
 }
 
+export interface ProjectSection {
+  title: string;
+  description: string;
+  media?: MediaBlock[];
+  mediaLayout?: "stacked" | "carousel";
+}
+
 export interface ProjectLink {
   url: string;
   label: string;
@@ -55,6 +62,7 @@ export interface ProjectDetail {
   media: MediaBlock[];
   mediaLayout?: "stacked" | "carousel";
   gallery?: MediaBlock[];
+  sections?: ProjectSection[];
 }
 
 const projects: ProjectDetail[] = [
@@ -117,6 +125,7 @@ const projects: ProjectDetail[] = [
     ],
     siteUrl: "https://www.earlyworm.io",
     siteLabel: "earlyworm.io",
+    links: [{ url: "/projects/earlyworm-v1", label: "Earlyworm v1 (2015)" }],
     asides: [
       {
         title: "Backend Architecture",
@@ -153,6 +162,13 @@ const projects: ProjectDetail[] = [
       },
       {
         type: "image",
+        src: "/images/projects/earlyworm-v1/app-screenshot.jpg",
+        label: "Article Feed",
+        aspectRatio: "1125/2226",
+        caption: "Reading a Chinese news article with source cards and bookmarking.",
+      },
+      {
+        type: "image",
         src: "/images/projects/earlyworm-trending.png",
         label: "Reddit",
         aspectRatio: "1292/356",
@@ -178,6 +194,35 @@ const projects: ProjectDetail[] = [
         label: "Architecture",
         aspectRatio: "960/720",
         caption: "Backend architecture: RSS ingestion, AI processing pipeline, recommendation engine, and API layer on Azure AKS.",
+      },
+    ],
+  },
+  {
+    slug: "earlyworm-v1",
+    titleLines: ["Earlyworm v1"],
+    subtitle:
+      "A Chinese e-reader that surfaced real news articles for language learners.",
+    description:
+      "Earlyworm v1 was the first iOS app I ever built. I was living in Shanghai, studying Chinese, and wanted a better way to bridge the gap between classroom materials and real-world content, so I taught myself Swift and started building. The idea was simple: instead of studying from textbooks, read real Chinese news articles and blog posts with built-in tools to help you through them. It pulled articles from Chinese news sites via RSS, displayed them in a clean reading interface, and had inline dictionary lookup so you could tap any word to see its definition and pinyin.\n\nA flashcard feature helped you review vocabulary from your reading, powered by a Node.js server communicating over WebSockets. A basic hill-climbing algorithm tracked your answers and estimated your proficiency level, adjusting card difficulty in real time.\n\nThe app was functional but limited by what was possible at the time: no AI rewriting, no proficiency matching beyond the hill-climbing heuristic, just raw articles with reading aids. Years later, the emergence of generative AI made it possible to revisit the core idea and build what became Earlyworm 2022.",
+    year: 2015,
+    role: "Solo Developer",
+    status: "Predecessor",
+    stack: ["Swift", "iOS", "Node.js", "WebSockets", "RSS"],
+    features: [
+      "Flashcard system with hill-climbing proficiency estimation",
+      "Real-time sync via WebSockets",
+      "Chinese news article reader with clean typography",
+      "Inline dictionary lookup with pinyin",
+      "RSS feed aggregation from Chinese news sources",
+    ],
+    links: [{ url: "/projects/earlyworm", label: "Earlyworm (2023)" }],
+    media: [
+      {
+        type: "youtube",
+        src: "_UK1_CEoBII",
+        label: "Demo",
+        aspectRatio: "16/9",
+        caption: "Earlyworm demo showing the article discovery and reading experience.",
       },
     ],
   },
@@ -736,6 +781,113 @@ result = fn([value])                     // \u2192 "42"
       "LLM-powered code automation tooling",
     ],
     media: [],
+  },
+  {
+    slug: "daydaycook",
+    titleLines: ["DayDayCook"],
+    subtitle:
+      "iOS Team Lead at Asia\u2019s premier cooking and lifestyle brand, building apps across iPhone, iPad, Apple TV, Apple Watch, and iMessage.",
+    description:
+      "DayDayCook\u2019s name resonates with young men and women across China, Hong Kong, Taiwan, and Southeast Asia. Videos are played in subways, airplanes, barber shops and more. The iOS app has been downloaded by millions and frequently appears on the App Store homepage and in other Apple promotional material. The app appeared in the introductory video to Apple\u2019s 2017 WWDC event.\n\nI joined in January 2016 as the 12th employee and first technical hire after the CTO, when the company raised its seed round from 500 Startups and M-Fund. I stayed through Series B, including a $5 million Series A+ from Alibaba. By December 2017, the company had grown to 175 employees. DayDayCook IPO\u2019d on the NYSE American in 2023.\n\nI was the only non-Chinese employee and conducted all work in Mandarin Chinese. As iOS Team Lead, I led the global launch in Summer 2016 (iPhone, iPad, and Apple TV apps featured on App Store front pages in China, Hong Kong, and Taiwan), independently built the iMessage app and coordinated with Apple to get it featured in three regions, and ran a 2017 Chinese New Year promotional campaign in partnership with the App Store.",
+    year: 2017,
+    role: "iOS Team Lead",
+    status: "Shipped",
+    stack: ["Objective-C", "Swift", "JavaScript", "UIKit", "WatchKit", "tvOS", "iMessage Extensions"],
+    features: [
+      "iPhone + iPad universal app with millions of downloads",
+      "Custom video player with picture-in-picture playback",
+      "Ecommerce with flash sales and countdown timers",
+      "iMessage app with recipe sharing and stickers",
+      "Apple TV app with 3,000+ recipe library",
+      "Apple Watch app with recipe carousel",
+      "App Store features across China, Hong Kong, and Taiwan",
+    ],
+    media: [
+      {
+        type: "youtube",
+        src: "webrbY98SaQ",
+        label: "2017 CNY Promotional Video",
+        aspectRatio: "16/9",
+        caption: "App Store promotional video for the 2017 Chinese New Year campaign.",
+      },
+      {
+        type: "image",
+        src: "/images/projects/daydaycook/wwdc-2017.png",
+        label: "WWDC 2017",
+        aspectRatio: "2/1",
+        caption: "DayDayCook appeared in the introductory video to Apple\u2019s 2017 WWDC event.",
+      },
+    ],
+    gallery: [
+      { type: "image", src: "/images/projects/daydaycook/appstore-featured.jpg", label: "App Store Featured", aspectRatio: "4/3" },
+      { type: "image", src: "/images/projects/daydaycook/appstore-featured-2.jpg", label: "App Store Featured", aspectRatio: "4/3" },
+      { type: "image", src: "/images/projects/daydaycook/global-launch.jpg", label: "Global Launch", aspectRatio: "9/16" },
+      { type: "image", src: "/images/projects/daydaycook/imessage-featured.jpg", label: "iMessage Featured", aspectRatio: "9/16" },
+
+      { type: "image", src: "/images/projects/daydaycook/team.jpg", label: "Team", aspectRatio: "1/1" },
+    ],
+    sections: [
+      {
+        title: "iPhone + iPad App",
+        description:
+          "The iPhone/iPad universal application is the core of the DayDayCook iOS experience. As team lead, I led development efforts on the app\u2019s custom video player, recipe page, ecommerce homepage, and many other features.\n\nThe video player supports picture-in-picture so users can keep watching while scrolling through recipes, quick sharing, recipe step overlays, synchronized recipe step alert popovers, a shortcut button to enter the comments section, and a fully customized user interface. The recipe page includes ingredients, cooking steps, recommended recipes, tips, and comments. The app also hosts flash sales and extended sales sections with countdown timers, a unique profile page with custom UI components, and interactive features like photo competitions and surveys.",
+        mediaLayout: "carousel",
+        media: [
+          { type: "image", src: "/images/projects/daydaycook/iphone-1.png", label: "Cooking Course Page (Paid Content)", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-video-player.png", label: "Custom Video Player w/ cooking steps overlaid", aspectRatio: "16/9" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-landscape.png", label: "Custom Video Player w/ buttons to open cooking steps or view comments", aspectRatio: "16/9" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-recipe.png", label: "Recipe Page", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-recipe-2.png", label: "Recipe Ingredients & Steps", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-recipe-3.png", label: "Ingredient Details", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-recipe-page.png", label: "Recommended Recipes & User Comments", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-recipe-nav.png", label: "Ecommerce Store", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-recipe-details.png", label: "Ecommerce Store w/ Articles & Products", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-ecommerce.png", label: "Ecommerce Store w/ Sold Out Item", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-profile.png", label: "User Profile Page", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-interactive.png", label: "User Voting Feature", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/iphone-interactive-2.png", label: "User Comments with Image Gallery", aspectRatio: "9/16" },
+        ],
+      },
+      {
+        title: "iMessage App",
+        description:
+          "The iMessage app and sticker app launched alongside iOS 10 with App Store featuring in Hong Kong, Taiwan, and mainland China. I created both applications independently in the week before iOS 10\u2019s release.\n\nThe app supports recipe sharing via iMessage, a sticker application with unlockable rewards for the 2017 Chinese New Year promotion, keyword and extended search functionality, and shopping list sharing. Shared recipes launch the main DayDayCook app directly to the specific recipe video. The instability of the beta iOS 10 versions and the requirements for split screen support in both landscape and portrait orientations created difficulties, but we delivered a highly performant application.",
+        mediaLayout: "carousel",
+        media: [
+          { type: "image", src: "/images/projects/daydaycook/imessage-1.jpg", label: "iMessage App on Hong Kong App Store front page", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/imessage-2.jpg", label: "iMessage App on Mainland China App Store front page", aspectRatio: "9/16" },
+          { type: "image", src: "/images/projects/daydaycook/imessage-stickers.jpg", label: "Stickers launch on App Store", aspectRatio: "2/1" },
+          { type: "image", src: "/images/projects/daydaycook/imessage-sharing.png", label: "Recipe Search in iMessage w/ Filters", aspectRatio: "9/16" },
+        ],
+      },
+      {
+        title: "Apple TV App",
+        description:
+          "As part of the global launch in 2016, I developed the Apple TV app independently using a combination of Objective-C and JavaScript. The app was featured on the front page of three App Stores\u2014China, Hong Kong, and Taiwan.\n\nThe app opens to the full library of over 3,000 DayDayCook recipes, sorted by category. It supports full text search, user login including via Facebook, and synchronizes each user\u2019s favorite recipes with the iPhone and iPad apps. Each recipe has a details page with video, cooking steps, ingredients, and a favorite button. All recipe videos can be played full screen on the Apple TV.",
+        mediaLayout: "carousel",
+        media: [
+          { type: "image", src: "/images/projects/daydaycook/appletv-featured.jpg", label: "App Store Featured", aspectRatio: "4/3" },
+          { type: "image", src: "/images/projects/daydaycook/appletv-library.png", label: "Recipe Library", aspectRatio: "16/9" },
+          { type: "image", src: "/images/projects/daydaycook/appletv-detail.png", label: "Recipe Details Page", aspectRatio: "16/9" },
+          { type: "image", src: "/images/projects/daydaycook/appletv-recipe.png", label: "Recipe Details", aspectRatio: "16/9" },
+          { type: "image", src: "/images/projects/daydaycook/appletv-video.png", label: "Video Playback", aspectRatio: "16/9" },
+        ],
+      },
+      {
+        title: "Apple Watch App",
+        description:
+          "The Apple Watch app was my first major independent project at DayDayCook. I spent one month collaborating with Apple\u2019s App Store team to build an application featuring DayDayCook recipes optimized for the smartwatch display.\n\nThe app opens to a rotating carousel of the five most recently published recipes. Users can swipe right to access favorite recipes saved through the main application. The primary challenges involved managing image sizing within the watch\u2019s undocumented memory constraints and designing creative workarounds for limited UI elements like scrollviews and pull-to-load-more functionality.",
+        mediaLayout: "carousel",
+        media: [
+          { type: "image", src: "/images/projects/daydaycook/watch-1.png", label: "Home / Recipe View", aspectRatio: "4/5" },
+          { type: "image", src: "/images/projects/daydaycook/watch-2.png", label: "Recipe Favorited", aspectRatio: "4/5" },
+          { type: "image", src: "/images/projects/daydaycook/watch-3.png", label: "Recipe Detail Page w/ Deep Link to iOS App Video Player", aspectRatio: "4/5" },
+          { type: "image", src: "/images/projects/daydaycook/watch-4.png", label: "Ingredient List", aspectRatio: "4/5" },
+          { type: "image", src: "/images/projects/daydaycook/watch-5.png", label: "Recipe Steps", aspectRatio: "4/5" },
+          { type: "image", src: "/images/projects/daydaycook/watch-6.png", label: "Recipe Steps w/ Images", aspectRatio: "4/5" },
+        ],
+      },
+    ],
   },
 ];
 
