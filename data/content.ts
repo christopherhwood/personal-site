@@ -173,10 +173,10 @@ export const sections: TimelineSection[] = [
   {
     id: "05",
     yearRange: "2021\u201323",
-    chapterLabel: "2021\u20132023 \u2014 META ADS",
+    chapterLabel: "2021\u20132023 \u2014 META ADS & RAYBAN",
     displayText: "From hypothesis to production.",
     bodyTexts: [
-      "Joined the ads team and took a data science hypothesis to production, realizing hundreds of millions in annual revenue. The interesting part was navigating the tension between revenue and user experience\u2014showing ads earlier in the session while keeping them relevant, working with a legacy system that wasn\u2019t built for this use case. Also built an LLM-powered unit test generation tool with the early AI tools available at Meta.",
+      "Joined the ads team and turned a $1B+ data science opportunity into production, generating over $500M annually with a capital-efficient architecture that bypassed the need for a multi-year backend rebuild. Then moved to the Rayban Meta team for operational excellence and early LLM tooling.",
     ],
     items: [
       {
@@ -184,12 +184,14 @@ export const sections: TimelineSection[] = [
         subtitle: "PRODUCTION / REVENUE OPTIMIZATION",
         type: "project",
         year: 2022,
+        slug: "newsfeed-ads",
       },
       {
-        title: "LLM Unit Test Generation",
-        subtitle: "PYTHON / TESTING TOOLS",
+        title: "Rayban Meta",
+        subtitle: "OPERATIONAL EXCELLENCE / LLM TOOLING",
         type: "project",
-        year: 2022,
+        year: 2023,
+        slug: "rayban-meta",
       },
     ],
   },
@@ -203,16 +205,11 @@ export const sections: TimelineSection[] = [
     ],
     items: [
       {
-        title: "UI Framework",
-        subtitle: "C++ / IPC / AR/VR",
+        title: "XROS",
+        subtitle: "UI FRAMEWORK / AR/VR OS",
         type: "project",
         year: 2019,
-      },
-      {
-        title: "App Model Design",
-        subtitle: "ARCHITECTURE / MICROKERNEL",
-        type: "project",
-        year: 2018,
+        slug: "xros",
       },
       {
         title: "The Difficulty of Becoming a Manager",

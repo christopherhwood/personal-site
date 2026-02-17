@@ -666,6 +666,77 @@ result = fn([value])                     // \u2192 "42"
       { type: "image", src: "/images/projects/qckfx-ads/image_product_4.jpg", label: "Product shot", aspectRatio: "1/1" },
     ],
   },
+  {
+    slug: "xros",
+    titleLines: ["XROS"],
+    subtitle:
+      "UI framework and application model for Meta's novel AR/VR operating system.",
+    links: [
+      {
+        url: "https://techcrunch.com/2013/04/10/has-facebook-quietly-acquired-osmeta-a-stealth-mobile-software-startup/",
+        label: "osmeta acquisition (TechCrunch)",
+      },
+      {
+        url: "https://www.theverge.com/2022/1/5/22868388/meta-xros-vr-ar-os-development-canceled",
+        label: "XROS canceled (The Verge)",
+      },
+    ],
+    description:
+      "I joined the former osmeta team\u2014a stealth mobile software startup Facebook had acquired in 2013. Shortly after, the remnants of the team moved to the XROS project, a 300+ person effort to build a custom microkernel-based operating system for AR/VR devices. The goal was to give Meta tight control over every layer of its hardware. I served as team lead for a team of 5 building UI components and widgets like text, scrollviews, and the application model. The work was much more similar to working on distributed systems than working on traditional embedded systems, although we also faced unique hardware constraints particularly in our graphics rendering stack.\n\nThis work gave me an opportunity to dive deep into how operating systems work, developing new programming languages, how UI systems work, graphics rendering stacks, working with applications distributed across several processes, and where there is room to innovate and improve on the operating systems and application models of today especially as we eye potential for new application models in AR and VR including declarative UI and server-driven UI vs traditional UI kits.\n\nThe project was canceled in late 2021 and the team was disbanded in early 2022, with members moving to other Reality Labs efforts.",
+    year: 2019,
+    role: "Team Lead",
+    status: "Internal",
+    stack: ["C", "C++", "TypeScript", "Microkernel", "IPC", "Custom UI Framework", "Graphics Rendering"],
+    features: [
+      "UI components and widgets (text, scrollviews)",
+      "Application model for a novel non-Unix OS",
+      "Apps distributed across multiple processes via IPC",
+      "Graphics rendering under hardware constraints",
+      "Declarative UI and server-driven UI exploration",
+    ],
+    media: [],
+  },
+  {
+    slug: "newsfeed-ads",
+    titleLines: ["Newsfeed Ads"],
+    subtitle:
+      "Delivered ads to the top position of Facebook's newsfeed, a $1B+ annual opportunity.",
+    description:
+      "Facebook never showed ads in the top position of newsfeed. It was thought it would be a bad user experience to open the app and immediately see an ad, and the time required to prepare an ad for the top position was significantly longer than the time to prepare an organic story from a friend. A data science analysis estimated the opportunity at $1B+ annually, but it faced internal resistance across organic feed teams and leadership and was considered technically infeasible at the required latency. The assumed path was a large-scale ranking overhaul requiring 40+ engineers over multiple years.\n\nI redesigned the approach. Rather than waiting on the full backend rebuild, I built a first-phase architecture using session-aware cached ads. By filtering for sessions with high-value, relevant cached ads, we could serve the first slot without deep ranking changes. This reduced projected headcount from 40+ to around 10, removed critical dependencies, and accelerated launch by roughly a year while preserving alignment with the longer-term ranking improvements planned as phase two.\n\nAny delays in feed loading can trickle down to impact DAUs and other critical metrics, so the tradeoffs had to be carefully validated. We defined revenue-per-time-spent success criteria and positioned this as the highest-return monetization option. We encountered several issues on the Android and iOS app side around how changing expectations for first ad position impacted existing delivery systems and application startup.\n\nThe team started at 3 in 2021, grew to 10 in early 2022, and then to 40+ in late 2022 as we neared shipping. When the project became resource-constrained, I gave an org-wide technical talk outlining the architecture and economic case, which led three backend engineers to transfer temporarily and unblock a critical path. The cached-ads phase alone generated over $500M annually, validating the economics ahead of the deeper backend rollout. The project shipped in H1 2023.",
+    year: 2022,
+    role: "Tech Lead",
+    status: "Shipped",
+    stack: ["Hack", "C++", "Objective-C", "Java", "Kotlin", "Android", "iOS", "Ads Infrastructure"],
+    features: [
+      "Session-aware cached ads architecture as capital-efficient first phase",
+      "Accelerated launch by a year",
+      "First phase generated $500M+ annually",
+      "Revenue-per-time-spent success criteria to validate tradeoffs",
+      "Scaled team from 3 to 40+ engineers",
+      "Cross-platform delivery across Android and iOS",
+    ],
+    media: [],
+  },
+  {
+    slug: "rayban-meta",
+    titleLines: ["Rayban Meta"],
+    subtitle:
+      "Operational excellence for Meta's Rayban smart glasses, plus an early LLM code automation project.",
+    description:
+      "I joined the Rayban Meta team in late 2022 right after the Rayban Stories had just shipped. Work was already underway for the next generation named Rayban Meta. I ended up on the operational excellence team, focused on defining and tracking key operational metrics for the engineering team and the project as a whole.\n\nMy work consisted of building dashboards, defining metrics, collaborating with partner teams on QA, bug triage, and customer excellence. One of the more impactful investigations was tracking down lost logs across the full stack\u2014the device firmware, the companion mobile app, and the backend services. Logs were being silently dropped at multiple points in the pipeline, which meant the team was making decisions on incomplete data. Part of the fix also resolved an issue where log transfers from the device to the companion app were causing contention with user media transfers. Fixing the pipeline end-to-end gave us a much clearer picture of real-world device behavior and a smoother user experience.\n\nIn late 2023 I spearheaded work on a project to automate parts of code-writing using LLMs\u2014one of the early internal efforts to apply AI to the development workflow at Meta.",
+    year: 2023,
+    role: "Software Engineer",
+    status: "Shipped",
+    stack: ["Objective-C", "Swift", "Kotlin", "C++"],
+    features: [
+      "Defined and tracked key operational metrics",
+      "Built engineering dashboards",
+      "Investigated and fixed lost logs across device, mobile app, and backend",
+      "QA and bug triage collaboration",
+      "LLM-powered code automation tooling",
+    ],
+    media: [],
+  },
 ];
 
 export function getProjectBySlug(slug: string): ProjectDetail | undefined {
