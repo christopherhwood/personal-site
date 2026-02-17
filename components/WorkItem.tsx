@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { WorkItem as WorkItemType } from "@/data/content";
+import { saveHomeScrollPosition } from "@/lib/homeState";
 
 export function WorkItem({ item }: { item: WorkItemType }) {
   const content = (
@@ -14,7 +15,7 @@ export function WorkItem({ item }: { item: WorkItemType }) {
   if (item.slug) {
     const href = item.type === "post" ? `/blog/${item.slug}` : `/projects/${item.slug}`;
     return (
-      <Link href={href} className="block no-underline">
+      <Link href={href} onClick={saveHomeScrollPosition} className="block no-underline">
         {content}
       </Link>
     );

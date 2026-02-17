@@ -1,4 +1,4 @@
-import { posts, getPostBySlug, getAllSlugs } from "@/data/posts";
+import { posts, getPostBySlug, getAllSlugs, getAdjacentPosts } from "@/data/posts";
 import { notFound } from "next/navigation";
 import { GrainOverlay } from "@/components/GrainOverlay";
 import { CustomCursor } from "@/components/CustomCursor";
@@ -75,6 +75,16 @@ function renderBlock(block: ContentBlock, index: number) {
       </pre>
     );
   }
+  if ("image" in block) {
+    return (
+      <img
+        key={index}
+        src={block.image}
+        alt=""
+        className="w-full"
+      />
+    );
+  }
   return null;
 }
 
@@ -82,6 +92,7 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const { prev, next } = getAdjacentPosts(slug);
 
   return (
     <>
@@ -91,7 +102,7 @@ export default async function BlogPostPage({ params }: Props) {
       <BackLink />
       <div className="site-wrapper">
         <aside className="sidebar">
-          <div>
+          <div className="shrink-0">
             <Link href="/" className="no-underline">
               <h1 className="font-serif italic font-normal text-[3rem] leading-[1.1] mb-5 tracking-[-0.02em]">
                 CHW
@@ -100,9 +111,11 @@ export default async function BlogPostPage({ params }: Props) {
             <span className="font-mono text-[0.75rem] uppercase tracking-[0.1em] text-muted mt-[10px] block">
               Curious Engineer
             </span>
+          </div>
 
+          <div className="hidden desktop:flex flex-col min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden mt-12">
             {post.aboutText && (
-              <div className="mt-12 hidden desktop:block">
+              <div>
                 <div className="pb-10 border-b border-primary/10">
                   <div className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted mb-4">
                     About This Piece
@@ -140,10 +153,46 @@ export default async function BlogPostPage({ params }: Props) {
                 )}
               </div>
             )}
+
+            {(prev || next) && (
+              <div className="mt-10 pt-10 border-t border-primary/10">
+                <div className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted mb-4">
+                  More Posts
+                </div>
+                <div className="space-y-4">
+                  {next && (
+                    <Link
+                      href={`/blog/${next.slug}`}
+                      className="block text-primary/70 hover:text-primary transition-opacity no-underline"
+                    >
+                      <span className="font-mono text-[0.6rem] uppercase text-muted">
+                        Next &rarr;
+                      </span>
+                      <span className="block font-serif text-[0.9rem] mt-1">
+                        {next.title}
+                      </span>
+                    </Link>
+                  )}
+                  {prev && (
+                    <Link
+                      href={`/blog/${prev.slug}`}
+                      className="block text-primary/70 hover:text-primary transition-opacity no-underline"
+                    >
+                      <span className="font-mono text-[0.6rem] uppercase text-muted">
+                        &larr; Previous
+                      </span>
+                      <span className="block font-serif text-[0.9rem] mt-1">
+                        {prev.title}
+                      </span>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="hidden desktop:block font-mono text-[10px] opacity-30">
-            CW &copy; 2025
+          <div className="hidden desktop:block font-mono text-[10px] opacity-30 shrink-0 pt-2 pb-0">
+            CW &copy; 2026
             <br />
             {post.chapterLabel} // {post.date.split(", ")[1] || post.date}
           </div>

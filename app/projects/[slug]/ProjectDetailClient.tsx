@@ -3,6 +3,7 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import type { ProjectDetail, MediaBlock, ProjectAside, ProjectSection } from "@/data/projects";
 import { BackLink } from "@/components/BackLink";
+import { Tweet } from "react-tweet";
 
 function MediaRenderer({ block, className }: { block: MediaBlock; className?: string }) {
   const base = className || "w-full rounded border border-primary/10";
@@ -150,7 +151,7 @@ function Lightbox({
   );
 }
 
-function AsideBox({ aside }: { aside: ProjectAside }) {
+function AsideBox({ aside, onImageClick }: { aside: ProjectAside; onImageClick?: () => void }) {
   return (
     <div className="border-l-2 border-primary/20 bg-primary/[0.03] rounded-r pl-6 pr-6 py-5 my-10">
       <div className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted mb-3">
@@ -170,12 +171,17 @@ function AsideBox({ aside }: { aside: ProjectAside }) {
         <CollapsibleBlock key={i} label={c.label} content={c.content} />
       ))}
       {aside.image && (
-        <img
-          src={aside.image.src}
-          alt={aside.title}
-          className="w-full mt-5 rounded"
-          style={{ aspectRatio: aside.image.aspectRatio }}
-        />
+        <button
+          className="w-full mt-5 cursor-zoom-in"
+          onClick={onImageClick}
+        >
+          <img
+            src={aside.image.src}
+            alt={aside.title}
+            className="w-full rounded"
+            style={{ aspectRatio: aside.image.aspectRatio }}
+          />
+        </button>
       )}
     </div>
   );
@@ -257,6 +263,7 @@ export function ProjectDetailClient({
   starsMap?: Record<string, number>;
 }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [asideLightbox, setAsideLightbox] = useState<{ src: string; alt: string } | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const placeholderRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -406,10 +413,21 @@ export function ProjectDetailClient({
                 <p className="font-mono text-[0.9rem] leading-[1.8] text-primary/80 mb-8">
                   {p}
                 </p>
+                {project.tweets
+                  ?.filter((t) => t.afterParagraph === i)
+                  .map((tweet, j) => (
+                    <div key={`tweet-${j}`} className="my-8" data-theme="dark">
+                      <Tweet id={tweet.id} />
+                    </div>
+                  ))}
                 {project.asides
                   ?.filter((a) => a.afterParagraph === i)
                   .map((aside, j) => (
-                    <AsideBox key={j} aside={aside} />
+                    <AsideBox
+                      key={j}
+                      aside={aside}
+                      onImageClick={aside.image ? () => setAsideLightbox({ src: aside.image!.src, alt: aside.title }) : undefined}
+                    />
                   ))}
               </div>
             ))}
@@ -576,9 +594,18 @@ export function ProjectDetailClient({
               </h3>
               <div className="max-w-[680px]">
                 {section.description.split("\n\n").map((p, pIdx) => (
-                  <p key={pIdx} className="font-mono text-[0.9rem] leading-[1.8] text-primary/80 mb-8">
-                    {p}
-                  </p>
+                  <div key={pIdx}>
+                    <p className="font-mono text-[0.9rem] leading-[1.8] text-primary/80 mb-8">
+                      {p}
+                    </p>
+                    {section.tweets
+                      ?.filter((t) => t.afterParagraph === pIdx)
+                      .map((tweet, j) => (
+                        <div key={`tweet-${j}`} className="my-8" data-theme="dark">
+                          <Tweet id={tweet.id} />
+                        </div>
+                      ))}
+                  </div>
                 ))}
               </div>
               {section.media && section.media.length > 0 && section.mediaLayout === "carousel" && (
@@ -721,6 +748,15 @@ export function ProjectDetailClient({
           />
         );
       })()}
+
+      {asideLightbox && (
+        <Lightbox
+          images={[asideLightbox]}
+          index={0}
+          onClose={() => setAsideLightbox(null)}
+          onNav={() => {}}
+        />
+      )}
     </div>
   );
 }

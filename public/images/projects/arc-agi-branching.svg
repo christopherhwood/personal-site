@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <style>
+    text { font-family: 'Space Mono', 'SF Mono', monospace; }
+    .title { font-size: 11px; fill: #E3E0D4; font-weight: 600; }
+    .subtitle { font-size: 8px; fill: #999; }
+    .label { font-size: 7px; fill: #888; letter-spacing: 0.5px; }
+    .label-sm { font-size: 7px; fill: #666; }
+    .success { font-size: 9px; fill: #5a6; font-weight: 600; }
+    .arrow { stroke: #444; stroke-width: 1; fill: none; marker-end: url(#arr); }
+    .arrow-ok { stroke: #5a6; stroke-width: 1; fill: none; marker-end: url(#arr-g); }
+    .box { rx: 4; ry: 4; }
+    .group-border { stroke: #333; stroke-width: 1; stroke-dasharray: 4 3; fill: none; rx: 6; }
+    .trunk { stroke: #E3E0D4; stroke-width: 2; fill: none; }
+    .branch { stroke: #666; stroke-width: 1.5; fill: none; }
+    .leaf { stroke: #444; stroke-width: 1; fill: none; }
+    .frozen { stroke: #68a; stroke-width: 0.5; stroke-dasharray: 3 2; fill: none; rx: 3; }
+  </style>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#444"/>
+    </marker>
+    <marker id="arr-g" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#5a6"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="400" fill="#111111" rx="6"/>
+
+  <!-- Timeline labels -->
+  <text x="40" y="28" class="label">EPOCH 0</text>
+  <text x="200" y="28" class="label">EPOCH 5 · FIRST FORK</text>
+  <text x="460" y="28" class="label">EPOCH 20 · SECOND FORK</text>
+  <text x="680" y="28" class="label">SELECT BEST</text>
+
+  <!-- Timeline line -->
+  <line x1="30" y1="36" x2="780" y2="36" stroke="#333" stroke-width="0.5"/>
+
+  <!-- Base UNet (trunk) -->
+  <rect x="40" y="160" width="130" height="50" class="box" fill="#1a1a2a"/>
+  <text x="105" y="182" class="title" text-anchor="middle">Base UNet</text>
+  <text x="105" y="196" class="subtitle" text-anchor="middle">5 epochs shared training</text>
+
+  <!-- Trunk line to fork point -->
+  <line x1="170" y1="185" x2="220" y2="185" class="trunk"/>
+
+  <!-- Fork point 1 -->
+  <circle cx="224" cy="185" r="4" fill="#E3E0D4"/>
+
+  <!-- Three branches from fork 1 -->
+  <!-- Branch 1 (top) -->
+  <path d="M 228 185 C 260 185, 270 90, 310 90" class="branch"/>
+  <rect x="310" y="66" width="120" height="50" class="box" fill="#1a1a2a"/>
+  <text x="370" y="85" class="title" text-anchor="middle">Fork A</text>
+  <text x="370" y="99" class="subtitle" text-anchor="middle">15 epochs independent</text>
+  <rect x="308" y="112" width="124" height="12" class="frozen"/>
+  <text x="370" y="121" class="label-sm" text-anchor="middle" fill="#68a">L1 frozen</text>
+
+  <!-- Branch 2 (middle) -->
+  <line x1="228" y1="185" x2="310" y2="185" class="branch"/>
+  <rect x="310" y="160" width="120" height="50" class="box" fill="#1a1a2a"/>
+  <text x="370" y="179" class="title" text-anchor="middle">Fork B</text>
+  <text x="370" y="193" class="subtitle" text-anchor="middle">15 epochs independent</text>
+  <rect x="308" y="206" width="124" height="12" class="frozen"/>
+  <text x="370" y="215" class="label-sm" text-anchor="middle" fill="#68a">L1 frozen</text>
+
+  <!-- Branch 3 (bottom) -->
+  <path d="M 228 185 C 260 185, 270 280, 310 280" class="branch"/>
+  <rect x="310" y="256" width="120" height="50" class="box" fill="#1a1a2a"/>
+  <text x="370" y="275" class="title" text-anchor="middle">Fork C</text>
+  <text x="370" y="289" class="subtitle" text-anchor="middle">15 epochs independent</text>
+  <rect x="308" y="302" width="124" height="12" class="frozen"/>
+  <text x="370" y="311" class="label-sm" text-anchor="middle" fill="#68a">L1 frozen</text>
+
+  <!-- Second fork points -->
+  <!-- Fork A → 3 leaves -->
+  <circle cx="434" cy="90" r="3" fill="#888"/>
+  <path d="M 437 90 C 450 90, 460 58, 490 58" class="leaf"/>
+  <line x1="437" y1="90" x2="490" y2="90" class="leaf"/>
+  <path d="M 437 90 C 450 90, 460 122, 490 122" class="leaf"/>
+
+  <rect x="490" y="44" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="62" class="subtitle" text-anchor="middle">Model 1</text>
+
+  <rect x="490" y="76" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="94" class="subtitle" text-anchor="middle">Model 2</text>
+
+  <rect x="490" y="108" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="126" class="subtitle" text-anchor="middle">Model 3</text>
+
+  <!-- Fork B → 3 leaves -->
+  <circle cx="434" cy="185" r="3" fill="#888"/>
+  <path d="M 437 185 C 450 185, 460 153, 490 153" class="leaf"/>
+  <line x1="437" y1="185" x2="490" y2="185" class="leaf"/>
+  <path d="M 437 185 C 450 185, 460 217, 490 217" class="leaf"/>
+
+  <rect x="490" y="139" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="157" class="subtitle" text-anchor="middle">Model 4</text>
+
+  <rect x="490" y="171" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="189" class="subtitle" text-anchor="middle">Model 5</text>
+
+  <rect x="490" y="203" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="221" class="subtitle" text-anchor="middle">Model 6</text>
+
+  <!-- Fork C → 3 leaves -->
+  <circle cx="434" cy="280" r="3" fill="#888"/>
+  <path d="M 437 280 C 450 280, 460 248, 490 248" class="leaf"/>
+  <line x1="437" y1="280" x2="490" y2="280" class="leaf"/>
+  <path d="M 437 280 C 450 280, 460 312, 490 312" class="leaf"/>
+
+  <rect x="490" y="234" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="252" class="subtitle" text-anchor="middle">Model 7</text>
+
+  <rect x="490" y="266" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="284" class="subtitle" text-anchor="middle">Model 8</text>
+
+  <rect x="490" y="298" width="80" height="28" class="box" fill="#2a2a1a"/>
+  <text x="530" y="316" class="subtitle" text-anchor="middle">Model 9</text>
+
+  <!-- Bracket / funnel to best result -->
+  <line x1="575" y1="58" x2="620" y2="58" class="leaf"/>
+  <line x1="575" y1="90" x2="620" y2="90" class="leaf"/>
+  <line x1="575" y1="122" x2="620" y2="122" class="leaf"/>
+  <line x1="575" y1="153" x2="620" y2="153" class="leaf"/>
+  <line x1="575" y1="185" x2="620" y2="185" class="leaf"/>
+  <line x1="575" y1="217" x2="620" y2="217" class="leaf"/>
+  <line x1="575" y1="248" x2="620" y2="248" class="leaf"/>
+  <line x1="575" y1="280" x2="620" y2="280" class="leaf"/>
+  <line x1="575" y1="312" x2="620" y2="312" class="leaf"/>
+
+  <!-- Vertical connector -->
+  <line x1="620" y1="58" x2="620" y2="312" stroke="#444" stroke-width="0.5"/>
+
+  <!-- Arrow to best -->
+  <line x1="620" y1="185" x2="670" y2="185" class="arrow-ok"/>
+
+  <!-- Best result -->
+  <rect x="676" y="160" width="100" height="50" class="box" fill="#1a2a1a" stroke="#363" stroke-width="0.5"/>
+  <text x="726" y="180" class="success" text-anchor="middle">Best Result</text>
+  <text x="726" y="196" class="subtitle" text-anchor="middle">Selected from 9</text>
+
+  <!-- Key insight -->
+  <rect x="40" y="348" width="720" height="36" class="box" fill="none" stroke="#333" stroke-width="0.5"/>
+  <text x="400" y="364" class="subtitle" text-anchor="middle" fill="#bbb">Shared early features (frozen L1) ensure agreement on low-level patterns.</text>
+  <text x="400" y="376" class="subtitle" text-anchor="middle" fill="#bbb">Independent training forces exploration of different high-level strategies.</text>
+</svg>

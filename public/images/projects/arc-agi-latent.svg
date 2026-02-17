@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" fill="none">
+  <style>
+    text { font-family: 'Space Mono', 'SF Mono', monospace; }
+    .title { font-size: 11px; fill: #E3E0D4; font-weight: 600; }
+    .subtitle { font-size: 8px; fill: #999; }
+    .label { font-size: 7px; fill: #888; letter-spacing: 0.5px; }
+    .fail { font-size: 9px; fill: #c66; font-weight: 600; }
+    .success { font-size: 9px; fill: #5a6; font-weight: 600; }
+    .arrow { stroke: #444; stroke-width: 1; fill: none; marker-end: url(#arr); }
+    .arrow-fail { stroke: #c66; stroke-width: 1; fill: none; marker-end: url(#arr-r); }
+    .arrow-ok { stroke: #5a6; stroke-width: 1; fill: none; marker-end: url(#arr-g); }
+    .box { rx: 4; ry: 4; }
+    .group-fail { stroke: #633; stroke-width: 1; stroke-dasharray: 4 3; fill: none; rx: 6; }
+    .group-ok { stroke: #363; stroke-width: 1; stroke-dasharray: 4 3; fill: none; rx: 6; }
+    .divider { stroke: #333; stroke-width: 1; stroke-dasharray: 2 4; }
+  </style>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#444"/>
+    </marker>
+    <marker id="arr-r" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#c66"/>
+    </marker>
+    <marker id="arr-g" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#5a6"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="460" fill="#111111" rx="6"/>
+
+  <!-- LEFT: Failed Approach (v1-v5) -->
+  <rect x="20" y="40" width="400" height="400" class="group-fail"/>
+  <text x="32" y="32" class="label" fill="#c66">VERSIONS 1–5 · FLAT LATENT</text>
+
+  <!-- ARC Grid -->
+  <rect x="60" y="70" width="150" height="44" class="box" fill="#2a2a1a"/>
+  <text x="135" y="89" class="title" text-anchor="middle">ARC Grid</text>
+  <text x="135" y="103" class="subtitle" text-anchor="middle">3–30 × 3–30, values 0–9</text>
+
+  <line x1="135" y1="114" x2="135" y2="134" class="arrow"/>
+
+  <!-- Embedding -->
+  <rect x="60" y="140" width="150" height="44" class="box" fill="#1a1a2a"/>
+  <text x="135" y="159" class="title" text-anchor="middle">Embedding</text>
+  <text x="135" y="173" class="subtitle" text-anchor="middle">16ch × 16 × 16</text>
+
+  <line x1="135" y1="184" x2="135" y2="204" class="arrow-fail"/>
+
+  <!-- Encoder → Flat -->
+  <rect x="60" y="210" width="150" height="54" class="box" fill="#2a1a1a"/>
+  <text x="135" y="229" class="title" text-anchor="middle">Encoder</text>
+  <text x="135" y="243" class="subtitle" text-anchor="middle">Collapse → 1×1 flat</text>
+  <text x="135" y="255" class="fail" text-anchor="middle">spatial info destroyed</text>
+
+  <line x1="135" y1="264" x2="135" y2="284" class="arrow-fail"/>
+
+  <!-- Reshape -->
+  <rect x="60" y="290" width="150" height="40" class="box" fill="#2a1a1a"/>
+  <text x="135" y="306" class="title" text-anchor="middle">Artificial Reshape</text>
+  <text x="135" y="320" class="subtitle" text-anchor="middle">Fake spatial dims for UNet</text>
+
+  <line x1="210" y1="310" x2="240" y2="310" class="arrow-fail"/>
+
+  <!-- UNet (deep) -->
+  <rect x="246" y="280" width="150" height="54" class="box" fill="#2a1a1a"/>
+  <text x="321" y="299" class="title" text-anchor="middle">UNet (5 levels)</text>
+  <text x="321" y="313" class="subtitle" text-anchor="middle">Deep · Dropout · Complex</text>
+  <text x="321" y="325" class="fail" text-anchor="middle">can't compensate</text>
+
+  <!-- Result fail -->
+  <rect x="100" y="370" width="280" height="50" class="box" fill="#2a1a1a" stroke="#633" stroke-width="0.5"/>
+  <text x="240" y="391" class="fail" text-anchor="middle">✗ LOSS PLATEAU</text>
+  <text x="240" y="407" class="subtitle" text-anchor="middle">Bigger latents = exponentially harder denoising</text>
+
+  <line x1="135" y1="330" x2="135" y2="380" class="arrow-fail"/>
+  <line x1="321" y1="334" x2="321" y2="380" class="arrow-fail"/>
+
+  <!-- Divider -->
+  <line x1="440" y1="50" x2="440" y2="430" class="divider"/>
+
+  <!-- RIGHT: Breakthrough (v6) -->
+  <rect x="460" y="40" width="400" height="400" class="group-ok"/>
+  <text x="472" y="32" class="label" fill="#5a6">VERSION 6 · SPATIAL LATENT</text>
+
+  <!-- ARC Grid -->
+  <rect x="490" y="70" width="150" height="44" class="box" fill="#2a2a1a"/>
+  <text x="565" y="89" class="title" text-anchor="middle">ARC Grid</text>
+  <text x="565" y="103" class="subtitle" text-anchor="middle">3–30 × 3–30, values 0–9</text>
+
+  <line x1="565" y1="114" x2="565" y2="134" class="arrow"/>
+
+  <!-- Embedding -->
+  <rect x="490" y="140" width="150" height="44" class="box" fill="#1a1a2a"/>
+  <text x="565" y="159" class="title" text-anchor="middle">Embedding</text>
+  <text x="565" y="173" class="subtitle" text-anchor="middle">16ch × 16 × 16</text>
+
+  <line x1="565" y1="184" x2="565" y2="204" class="arrow-ok"/>
+
+  <!-- Encoder → Spatial -->
+  <rect x="490" y="210" width="150" height="54" class="box" fill="#1a2a1a"/>
+  <text x="565" y="229" class="title" text-anchor="middle">Encoder</text>
+  <text x="565" y="243" class="subtitle" text-anchor="middle">Stride-3 conv → 256×3×3</text>
+  <text x="565" y="255" class="success" text-anchor="middle">natural spatial structure</text>
+
+  <!-- Annotation -->
+  <rect x="670" y="212" width="175" height="50" class="box" fill="none" stroke="#363" stroke-width="0.5"/>
+  <text x="757" y="228" class="subtitle" text-anchor="middle" fill="#5a6">Each of 9 latent positions</text>
+  <text x="757" y="240" class="subtitle" text-anchor="middle" fill="#5a6">↔ 3×3 region of 9×9 grid</text>
+  <text x="757" y="252" class="subtitle" text-anchor="middle" fill="#5a6">spatial correspondence preserved</text>
+  <line x1="640" y1="237" x2="670" y2="237" stroke="#363" stroke-width="0.5" stroke-dasharray="3 2"/>
+
+  <line x1="565" y1="264" x2="565" y2="290" class="arrow-ok"/>
+
+  <!-- UNet (simple) -->
+  <rect x="490" y="296" width="150" height="44" class="box" fill="#1a2a1a"/>
+  <text x="565" y="315" class="title" text-anchor="middle">UNet (2 levels)</text>
+  <text x="565" y="329" class="subtitle" text-anchor="middle">Simple · Effective</text>
+
+  <line x1="565" y1="340" x2="565" y2="365" class="arrow-ok"/>
+
+  <!-- Result success -->
+  <rect x="480" y="370" width="240" height="50" class="box" fill="#1a2a1a" stroke="#363" stroke-width="0.5"/>
+  <text x="600" y="391" class="success" text-anchor="middle">✓ SOLVED A TASK</text>
+  <text x="600" y="407" class="subtitle" text-anchor="middle">Loss ↓ 10× · Autoencoder loss ↓ 100×</text>
+</svg>

@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" fill="none">
+  <style>
+    text { font-family: 'SF Mono', 'Menlo', monospace; }
+    .title { font-size: 11px; fill: #E3E0D4; font-weight: 600; }
+    .subtitle { font-size: 8px; fill: #999; }
+    .label { font-size: 7px; fill: #888; letter-spacing: 0.5px; }
+    .arrow { stroke: #444; stroke-width: 1; fill: none; marker-end: url(#arrowhead); }
+    .arrow-data { stroke: #5a6; stroke-width: 1; fill: none; marker-end: url(#arrowhead-green); }
+    .arrow-blue { stroke: #68a; stroke-width: 1; fill: none; marker-end: url(#arrowhead-blue); }
+    .box { rx: 4; ry: 4; }
+    .group-border { stroke: #333; stroke-width: 1; stroke-dasharray: 4 3; fill: none; rx: 6; ry: 6; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#444"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#5a6"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#68a"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="440" fill="#111111"/>
+
+  <!-- Section: Data Prep Pipeline (left) -->
+  <rect x="20" y="50" width="200" height="340" class="group-border"/>
+  <text x="32" y="42" class="label">DATA PREP PIPELINE</text>
+
+  <!-- Single Product Photo -->
+  <rect x="40" y="70" width="160" height="44" class="box" fill="#2a2a1a"/>
+  <text x="120" y="90" class="title" text-anchor="middle">Single Photo</text>
+  <text x="120" y="104" class="subtitle" text-anchor="middle">One product image as input</text>
+
+  <!-- Background Removal -->
+  <rect x="40" y="130" width="160" height="44" class="box" fill="#1a1a2a"/>
+  <text x="120" y="150" class="title" text-anchor="middle">Background Removal</text>
+  <text x="120" y="164" class="subtitle" text-anchor="middle">Isolate product from scene</text>
+
+  <!-- Crop & Split Script -->
+  <rect x="40" y="190" width="160" height="50" class="box" fill="#1a1a2a"/>
+  <text x="120" y="210" class="title" text-anchor="middle">Crop &amp; Split Script</text>
+  <text x="120" y="224" class="subtitle" text-anchor="middle">Random crops · Flips · Scales</text>
+  <text x="120" y="234" class="subtitle" text-anchor="middle">1 photo → 15-20 variants</text>
+
+  <!-- Auto-Captioning -->
+  <rect x="40" y="256" width="160" height="50" class="box" fill="#2a1a2a"/>
+  <text x="120" y="276" class="title" text-anchor="middle">Auto-Captioning</text>
+  <text x="120" y="290" class="subtitle" text-anchor="middle">LLM describes each crop</text>
+  <text x="120" y="300" class="subtitle" text-anchor="middle">Injects trigger token</text>
+
+  <!-- Training Dataset -->
+  <rect x="40" y="322" width="160" height="50" class="box" fill="#1a2a1a" stroke="#5a6" stroke-width="0.5"/>
+  <text x="120" y="342" class="title" text-anchor="middle">Training Dataset</text>
+  <text x="120" y="356" class="subtitle" text-anchor="middle">Captioned crops + token</text>
+  <text x="120" y="366" class="subtitle" text-anchor="middle">e.g. "a photo of sks_crunchy"</text>
+
+  <!-- Arrows: data prep flow -->
+  <line x1="120" y1="114" x2="120" y2="130" class="arrow-data"/>
+  <line x1="120" y1="174" x2="120" y2="190" class="arrow-data"/>
+  <line x1="120" y1="240" x2="120" y2="256" class="arrow-data"/>
+  <line x1="120" y1="306" x2="120" y2="322" class="arrow-data"/>
+
+  <!-- Section: LoRA Training (center) -->
+  <rect x="250" y="50" width="240" height="340" class="group-border"/>
+  <text x="262" y="42" class="label">LORA FINE-TUNING</text>
+
+  <!-- Training Config -->
+  <rect x="270" y="70" width="200" height="50" class="box" fill="#2a1a1a"/>
+  <text x="370" y="90" class="title" text-anchor="middle">Training Config</text>
+  <text x="370" y="104" class="subtitle" text-anchor="middle">Learning rate · Steps · LoRA rank</text>
+  <text x="370" y="114" class="subtitle" text-anchor="middle">Trigger token · Batch size</text>
+
+  <!-- Base Model -->
+  <rect x="270" y="140" width="200" height="44" class="box" fill="#1a2a2a"/>
+  <text x="370" y="160" class="title" text-anchor="middle">Flux Base Model</text>
+  <text x="370" y="174" class="subtitle" text-anchor="middle">Frozen weights</text>
+
+  <!-- Training Loop -->
+  <rect x="270" y="205" width="200" height="66" class="box" fill="#1a2a1a"/>
+  <text x="370" y="225" class="title" text-anchor="middle">LoRA Training Loop</text>
+  <text x="370" y="239" class="subtitle" text-anchor="middle">Low-rank adaptation layers</text>
+  <text x="370" y="251" class="subtitle" text-anchor="middle">~500-1000 steps · ~20 min A100</text>
+  <text x="370" y="263" class="subtitle" text-anchor="middle">Only adapter weights updated</text>
+
+  <!-- Validation -->
+  <rect x="270" y="290" width="200" height="44" class="box" fill="#222"/>
+  <text x="370" y="308" class="title" text-anchor="middle" font-size="9">Validation</text>
+  <text x="370" y="322" class="subtitle" text-anchor="middle">Generate test images w/ trigger token</text>
+  <text x="370" y="332" class="subtitle" text-anchor="middle">Compare against reference photo</text>
+
+  <!-- Arrows: data → training -->
+  <line x1="200" y1="347" x2="235" y2="347" class="arrow-data"/>
+  <path d="M 235 347 L 235 238 L 270 238" class="arrow-data"/>
+
+  <!-- Arrows: training internal -->
+  <line x1="370" y1="120" x2="370" y2="140" class="arrow"/>
+  <line x1="370" y1="184" x2="370" y2="205" class="arrow-blue"/>
+  <line x1="370" y1="271" x2="370" y2="290" class="arrow-data"/>
+
+  <!-- Feedback arrow: validation → training -->
+  <path d="M 270 316 L 255 316 L 255 238 L 270 238" class="arrow" stroke-dasharray="3 2"/>
+
+  <!-- Section: Model Registry (right-top) -->
+  <rect x="520" y="50" width="190" height="170" class="group-border"/>
+  <text x="532" y="42" class="label">MODEL REGISTRY</text>
+
+  <!-- LoRA Weights -->
+  <rect x="540" y="70" width="150" height="44" class="box" fill="#1a2a2a"/>
+  <text x="615" y="90" class="title" text-anchor="middle">LoRA Weights</text>
+  <text x="615" y="104" class="subtitle" text-anchor="middle">~50-100 MB per product</text>
+
+  <!-- Metadata -->
+  <rect x="540" y="130" width="150" height="72" class="box" fill="#222"/>
+  <text x="615" y="148" class="title" text-anchor="middle" font-size="9">Product Metadata</text>
+  <text x="615" y="162" class="subtitle" text-anchor="middle">Trigger token · Version</text>
+  <text x="615" y="174" class="subtitle" text-anchor="middle">Training config snapshot</text>
+  <text x="615" y="186" class="subtitle" text-anchor="middle">Validation scores</text>
+  <text x="615" y="198" class="subtitle" text-anchor="middle">Reference image hash</text>
+
+  <!-- Arrow: training → registry -->
+  <line x1="470" y1="238" x2="495" y2="238" class="arrow-data"/>
+  <path d="M 495 238 L 495 92 L 540 92" class="arrow-data"/>
+
+  <!-- Section: Deployed to Inference (right-bottom) -->
+  <rect x="520" y="250" width="190" height="140" class="group-border"/>
+  <text x="532" y="242" class="label">DEPLOYED TO INFERENCE</text>
+
+  <!-- ComfyUI -->
+  <rect x="540" y="270" width="150" height="36" class="box" fill="#1a2a1a"/>
+  <text x="615" y="288" class="title" text-anchor="middle" font-size="9">ComfyUI Pipeline</text>
+  <text x="615" y="300" class="subtitle" text-anchor="middle">Loads LoRA at runtime</text>
+
+  <!-- Flux + LoRA -->
+  <rect x="540" y="320" width="150" height="36" class="box" fill="#1a2a1a"/>
+  <text x="615" y="338" class="title" text-anchor="middle" font-size="9">Flux + Loaded LoRA</text>
+  <text x="615" y="350" class="subtitle" text-anchor="middle">Trigger token in prompt</text>
+
+  <!-- Arrows: registry → inference -->
+  <line x1="615" y1="202" x2="615" y2="270" class="arrow-blue"/>
+  <line x1="615" y1="306" x2="615" y2="320" class="arrow"/>
+
+  <!-- Section: GPU Infra -->
+  <rect x="740" y="50" width="160" height="340" class="group-border"/>
+  <text x="752" y="42" class="label">INFRASTRUCTURE</text>
+
+  <rect x="760" y="70" width="120" height="36" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="820" y="88" class="title" text-anchor="middle" font-size="9">Azure GPU VMs</text>
+  <text x="820" y="100" class="subtitle" text-anchor="middle">A100 · Training</text>
+
+  <rect x="760" y="120" width="120" height="36" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="820" y="138" class="title" text-anchor="middle" font-size="9">Modal</text>
+  <text x="820" y="150" class="subtitle" text-anchor="middle">Serverless GPUs</text>
+
+  <rect x="760" y="170" width="120" height="36" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="820" y="188" class="title" text-anchor="middle" font-size="9">Azure Blob</text>
+  <text x="820" y="200" class="subtitle" text-anchor="middle">Weight storage</text>
+
+  <rect x="760" y="220" width="120" height="36" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="820" y="238" class="title" text-anchor="middle" font-size="9">ComfyUI Server</text>
+  <text x="820" y="250" class="subtitle" text-anchor="middle">Workflow execution</text>
+
+  <rect x="760" y="270" width="120" height="36" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="820" y="288" class="title" text-anchor="middle" font-size="9">Python Workers</text>
+  <text x="820" y="300" class="subtitle" text-anchor="middle">Data prep jobs</text>
+
+  <rect x="760" y="320" width="120" height="36" class="box" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="820" y="338" class="title" text-anchor="middle" font-size="9">LLM API</text>
+  <text x="820" y="350" class="subtitle" text-anchor="middle">Auto-captioning</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="418" x2="70" y2="418" class="arrow-data"/>
+  <text x="78" y="421" class="subtitle">Image / weight data</text>
+  <line x1="220" y1="418" x2="250" y2="418" class="arrow-blue"/>
+  <text x="258" y="421" class="subtitle">Model weights</text>
+  <line x1="380" y1="418" x2="410" y2="418" class="arrow"/>
+  <text x="418" y="421" class="subtitle">Config / dependency</text>
+  <line x1="540" y1="418" x2="570" y2="418" class="arrow" stroke-dasharray="3 2"/>
+  <text x="578" y="421" class="subtitle">Feedback loop</text>
+</svg>

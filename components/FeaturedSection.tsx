@@ -2,6 +2,7 @@
 import Link from "next/link";
 import type { FeaturedProject } from "@/data/content";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { saveHomeScrollPosition } from "@/lib/homeState";
 
 function FeaturedItem({ item }: { item: FeaturedProject }) {
   const inner = (
@@ -27,7 +28,11 @@ function FeaturedItem({ item }: { item: FeaturedProject }) {
 
   if (item.slug) {
     return (
-      <Link href={`/projects/${item.slug}`} className="block no-underline h-full">
+      <Link
+        href={`/projects/${item.slug}`}
+        onClick={saveHomeScrollPosition}
+        className="block no-underline h-full"
+      >
         {inner}
       </Link>
     );

@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { HOME_RESTORE_PENDING_KEY } from "@/lib/homeState";
 
 let lastActiveSection = "";
 let lastProgress = 0;
@@ -87,12 +88,12 @@ export function useActiveSection(sectionIds: string[]) {
   const [progress, setProgress] = useState(initialState.progress);
   // Even with a runtime snapshot, wait for scroll restoration to settle before
   // rendering the active marker to avoid a visible flash to stale state.
-  const [isReady, setIsReady] = useState(Boolean(sectionIds.length === 0));
+  const [isReady, setIsReady] = useState(
+    Boolean(sectionIds.length === 0 || hasRuntimeState)
+  );
+  const hasSnapshotAtMountRef = useRef(Boolean(hasRuntimeState));
 
   useEffect(() => {
-    const persistedState = hasRuntimeState ? null : loadState(sectionIds);
-    const hasSnapshotAtMount = Boolean(hasRuntimeState || persistedState);
-
     const applyState = (next: ActiveState) => {
       lastActiveSection = next.activeSection;
       lastProgress = next.progress;
@@ -100,6 +101,23 @@ export function useActiveSection(sectionIds: string[]) {
       setActiveSection(next.activeSection);
       setProgress(next.progress);
     };
+
+    let shouldRestoreFromStorage = false;
+    try {
+      shouldRestoreFromStorage =
+        window.sessionStorage.getItem(HOME_RESTORE_PENDING_KEY) === "1";
+    } catch {
+      shouldRestoreFromStorage = false;
+    }
+    if (!hasSnapshotAtMountRef.current && shouldRestoreFromStorage) {
+      const persistedRestoreState = loadState(sectionIds);
+      if (persistedRestoreState) {
+        hasSnapshotAtMountRef.current = true;
+        applyState(persistedRestoreState);
+      }
+    }
+
+    const hasSnapshotAtMount = hasSnapshotAtMountRef.current;
 
     const updateState = () => {
       applyState(getActiveStateFromScroll(sectionIds));
@@ -117,7 +135,7 @@ export function useActiveSection(sectionIds: string[]) {
     };
 
     // Wait until scroll restoration stabilizes. If we already have a snapshot
-    // (runtime or persisted), preserve it until the scroll position settles
+    // (runtime or persisted restore), preserve it until the scroll position settles
     // to avoid a flash/jump. On each frame, poll the scroll position; once
     // stable, calculate the real state and bind event listeners.
     let previousY = window.scrollY;
@@ -152,7 +170,7 @@ export function useActiveSection(sectionIds: string[]) {
       window.removeEventListener("scroll", updateState);
       window.removeEventListener("resize", updateState);
     };
-  }, [hasRuntimeState, sectionIds]);
+  }, [sectionIds]);
 
   return { activeSection, progress, isReady };
 }

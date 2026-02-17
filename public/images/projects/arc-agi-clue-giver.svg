@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 490" fill="none">
+  <style>
+    text { font-family: 'Space Mono', 'SF Mono', monospace; }
+    .title { font-size: 11px; fill: #E3E0D4; font-weight: 600; }
+    .subtitle { font-size: 8px; fill: #999; }
+    .label { font-size: 7px; fill: #888; letter-spacing: 0.5px; }
+    .success { font-size: 9px; fill: #5a6; font-weight: 600; }
+    .arrow { stroke: #444; stroke-width: 1; fill: none; marker-end: url(#arr); }
+    .arrow-1 { stroke: #68a; stroke-width: 1; fill: none; marker-end: url(#arr-1); }
+    .arrow-2 { stroke: #a68; stroke-width: 1; fill: none; marker-end: url(#arr-2); }
+    .arrow-3 { stroke: #8a6; stroke-width: 1; fill: none; marker-end: url(#arr-3); }
+    .arrow-ok { stroke: #5a6; stroke-width: 1; fill: none; marker-end: url(#arr-g); }
+    .box { rx: 4; ry: 4; }
+    .group-border { stroke: #333; stroke-width: 1; stroke-dasharray: 4 3; fill: none; rx: 6; }
+    .divider { stroke: #333; stroke-width: 1; stroke-dasharray: 2 4; }
+    .path-1 { stroke: #68a; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+    .path-2 { stroke: #a68; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+    .path-3 { stroke: #8a6; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+  </style>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#444"/>
+    </marker>
+    <marker id="arr-1" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#68a"/>
+    </marker>
+    <marker id="arr-2" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#a68"/>
+    </marker>
+    <marker id="arr-3" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#8a6"/>
+    </marker>
+    <marker id="arr-g" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#5a6"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="490" fill="#111111" rx="6"/>
+
+  <!-- ==================== LEFT: Training Phase ==================== -->
+  <rect x="20" y="40" width="420" height="430" class="group-border"/>
+  <text x="32" y="32" class="label">TRAINING · STOCHASTIC PATH GENERATION</text>
+
+  <!-- Clean Output -->
+  <rect x="155" y="65" width="150" height="40" class="box" fill="#1a2a1a"/>
+  <text x="230" y="83" class="title" text-anchor="middle">Clean Output</text>
+  <text x="230" y="96" class="subtitle" text-anchor="middle">Ground truth target</text>
+
+  <line x1="230" y1="105" x2="230" y2="120" class="arrow"/>
+
+  <!-- Clue Giver -->
+  <rect x="120" y="126" width="220" height="46" class="box" fill="#1a1a2a"/>
+  <text x="230" y="145" class="title" text-anchor="middle">Clue Giver</text>
+  <text x="230" y="161" class="subtitle" text-anchor="middle">Cosine interpolation + bounded stochastic walk</text>
+
+  <!-- Three paths: diamond shape fanning out and converging -->
+  <path d="M 230 172 Q 75 240, 230 308" class="path-1"/>
+  <path d="M 230 172 C 245 220, 215 260, 230 308" class="path-2"/>
+  <path d="M 230 172 Q 385 240, 230 308" class="path-3"/>
+
+  <!-- Path labels at widest points -->
+  <text x="100" y="237" class="subtitle" fill="#68a">path 1</text>
+  <text x="238" y="228" class="subtitle" fill="#a68">path 2</text>
+  <text x="350" y="237" class="subtitle" fill="#8a6">path 3</text>
+
+  <!-- Annotation: different seeds -->
+  <rect x="298" y="175" width="130" height="28" class="box" fill="none" stroke="#333" stroke-width="0.5"/>
+  <text x="363" y="188" class="subtitle" text-anchor="middle" fill="#777">Different random seeds</text>
+  <text x="363" y="198" class="subtitle" text-anchor="middle" fill="#777">→ different paths</text>
+  <line x1="260" y1="190" x2="298" y2="190" stroke="#333" stroke-width="0.5" stroke-dasharray="3 2"/>
+
+  <!-- Noisy Input -->
+  <rect x="155" y="312" width="150" height="40" class="box" fill="#2a1a1a"/>
+  <text x="230" y="330" class="title" text-anchor="middle">Noisy Input</text>
+  <text x="230" y="343" class="subtitle" text-anchor="middle">ARC test input</text>
+
+  <!-- Fan-out from Noisy Input down to Solvers -->
+  <line x1="200" y1="352" x2="100" y2="380" class="arrow-1"/>
+  <line x1="230" y1="352" x2="230" y2="380" class="arrow-2"/>
+  <line x1="260" y1="352" x2="360" y2="380" class="arrow-3"/>
+
+  <!-- Solvers row -->
+  <rect x="40" y="386" width="120" height="36" class="box" fill="#1a1a2a" stroke="#68a" stroke-width="0.5"/>
+  <text x="100" y="401" class="title" text-anchor="middle">Solver 1</text>
+  <text x="100" y="414" class="subtitle" text-anchor="middle" fill="#68a">reverses path 1</text>
+
+  <rect x="170" y="386" width="120" height="36" class="box" fill="#1a1a2a" stroke="#a68" stroke-width="0.5"/>
+  <text x="230" y="401" class="title" text-anchor="middle">Solver 2</text>
+  <text x="230" y="414" class="subtitle" text-anchor="middle" fill="#a68">reverses path 2</text>
+
+  <rect x="300" y="386" width="120" height="36" class="box" fill="#1a1a2a" stroke="#8a6" stroke-width="0.5"/>
+  <text x="360" y="401" class="title" text-anchor="middle">Solver 3</text>
+  <text x="360" y="414" class="subtitle" text-anchor="middle" fill="#8a6">reverses path 3</text>
+
+  <!-- Key insight -->
+  <text x="230" y="452" class="subtitle" text-anchor="middle" fill="#bbb">Each solver internalizes a different reversal strategy.</text>
+  <text x="230" y="464" class="subtitle" text-anchor="middle" fill="#bbb">Randomness lives in training, not inference.</text>
+
+  <!-- ==================== Divider ==================== -->
+  <line x1="452" y1="50" x2="452" y2="460" class="divider"/>
+
+  <!-- ==================== RIGHT: Inference Phase ==================== -->
+  <rect x="465" y="40" width="395" height="430" class="group-border"/>
+  <text x="477" y="32" class="label">INFERENCE · ENSEMBLE SEARCH</text>
+
+  <!-- Test Input -->
+  <rect x="585" y="65" width="150" height="40" class="box" fill="#2a2a1a"/>
+  <text x="660" y="83" class="title" text-anchor="middle">Test Input</text>
+  <text x="660" y="96" class="subtitle" text-anchor="middle">Unknown transformation</text>
+
+  <!-- Fan out from Test Input to three solvers -->
+  <line x1="630" y1="105" x2="545" y2="146" class="arrow-1"/>
+  <line x1="660" y1="105" x2="660" y2="146" class="arrow-2"/>
+  <line x1="690" y1="105" x2="775" y2="146" class="arrow-3"/>
+
+  <!-- Solver outputs -->
+  <rect x="495" y="152" width="100" height="36" class="box" fill="#1a1a2a" stroke="#68a" stroke-width="0.5"/>
+  <text x="545" y="168" class="subtitle" text-anchor="middle">Solver 1</text>
+  <text x="545" y="180" class="subtitle" text-anchor="middle" fill="#68a">→ Output A</text>
+
+  <rect x="610" y="152" width="100" height="36" class="box" fill="#1a1a2a" stroke="#a68" stroke-width="0.5"/>
+  <text x="660" y="168" class="subtitle" text-anchor="middle">Solver 2</text>
+  <text x="660" y="180" class="subtitle" text-anchor="middle" fill="#a68">→ Output B</text>
+
+  <rect x="725" y="152" width="100" height="36" class="box" fill="#1a1a2a" stroke="#8a6" stroke-width="0.5"/>
+  <text x="775" y="168" class="subtitle" text-anchor="middle">Solver 3</text>
+  <text x="775" y="180" class="subtitle" text-anchor="middle" fill="#8a6">→ Output A</text>
+
+  <!-- Candidate output boxes -->
+  <line x1="545" y1="188" x2="545" y2="222" class="arrow-1"/>
+  <line x1="660" y1="188" x2="660" y2="222" class="arrow-2"/>
+  <line x1="775" y1="188" x2="775" y2="222" class="arrow-3"/>
+
+  <rect x="515" y="228" width="60" height="30" class="box" fill="#1a2a2a" stroke="#68a" stroke-width="0.5"/>
+  <text x="545" y="247" class="title" text-anchor="middle" font-size="10">A</text>
+
+  <rect x="630" y="228" width="60" height="30" class="box" fill="#2a1a2a" stroke="#a68" stroke-width="0.5"/>
+  <text x="660" y="247" class="title" text-anchor="middle" font-size="10">B</text>
+
+  <rect x="745" y="228" width="60" height="30" class="box" fill="#1a2a2a" stroke="#8a6" stroke-width="0.5"/>
+  <text x="775" y="247" class="title" text-anchor="middle" font-size="10">A</text>
+
+  <!-- Arrows to Majority Vote -->
+  <line x1="545" y1="258" x2="655" y2="302" class="arrow"/>
+  <line x1="660" y1="258" x2="660" y2="302" class="arrow"/>
+  <line x1="775" y1="258" x2="665" y2="302" class="arrow"/>
+
+  <!-- Majority Vote -->
+  <rect x="595" y="308" width="130" height="40" class="box" fill="#1a1a2a"/>
+  <text x="660" y="325" class="title" text-anchor="middle">Majority Vote</text>
+  <text x="660" y="339" class="subtitle" text-anchor="middle">Most frequent answer wins</text>
+
+  <line x1="660" y1="348" x2="660" y2="378" class="arrow-ok"/>
+
+  <!-- Final answer -->
+  <rect x="595" y="384" width="130" height="40" class="box" fill="#1a2a1a" stroke="#5a6" stroke-width="0.5"/>
+  <text x="660" y="401" class="success" text-anchor="middle">Answer: A</text>
+  <text x="660" y="415" class="subtitle" text-anchor="middle">2 of 3 solvers agree</text>
+
+  <!-- Legend -->
+  <line x1="505" y1="458" x2="525" y2="458" class="path-1"/>
+  <text x="531" y="461" class="subtitle" fill="#68a">Path 1</text>
+  <line x1="595" y1="458" x2="615" y2="458" class="path-2"/>
+  <text x="621" y="461" class="subtitle" fill="#a68">Path 2</text>
+  <line x1="685" y1="458" x2="705" y2="458" class="path-3"/>
+  <text x="711" y="461" class="subtitle" fill="#8a6">Path 3</text>
+</svg>

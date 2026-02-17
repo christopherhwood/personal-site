@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" fill="none">
+  <style>
+    text { font-family: 'SF Mono', 'Menlo', monospace; }
+    .title { font-size: 11px; fill: #E3E0D4; font-weight: 600; }
+    .subtitle { font-size: 8px; fill: #999; }
+    .label { font-size: 7px; fill: #888; letter-spacing: 0.5px; }
+    .arrow { stroke: #444; stroke-width: 1; fill: none; marker-end: url(#arrowhead); }
+    .arrow-data { stroke: #5a6; stroke-width: 1; fill: none; marker-end: url(#arrowhead-green); }
+    .arrow-blue { stroke: #68a; stroke-width: 1; fill: none; marker-end: url(#arrowhead-blue); }
+    .box { rx: 4; ry: 4; }
+    .group-border { stroke: #333; stroke-width: 1; stroke-dasharray: 4 3; fill: none; rx: 6; ry: 6; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#444"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#5a6"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#68a"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="420" fill="#111111"/>
+
+  <!-- Section: Inputs (left) -->
+  <rect x="20" y="50" width="180" height="310" class="group-border"/>
+  <text x="32" y="42" class="label">INPUTS</text>
+
+  <!-- Product Photo -->
+  <rect x="40" y="75" width="140" height="50" class="box" fill="#2a2a1a"/>
+  <text x="110" y="97" class="title" text-anchor="middle">Product Photo</text>
+  <text x="110" y="111" class="subtitle" text-anchor="middle">Original product image</text>
+
+  <!-- Scene Prompt -->
+  <rect x="40" y="150" width="140" height="50" class="box" fill="#2a2a1a"/>
+  <text x="110" y="172" class="title" text-anchor="middle">Scene Prompt</text>
+  <text x="110" y="186" class="subtitle" text-anchor="middle">"Beach at sunset..."</text>
+
+  <!-- Fine-tuned LoRA -->
+  <rect x="40" y="230" width="140" height="50" class="box" fill="#1a1a2a"/>
+  <text x="110" y="252" class="title" text-anchor="middle">Product LoRA</text>
+  <text x="110" y="266" class="subtitle" text-anchor="middle">Fine-tuned weights</text>
+
+  <!-- Negative Prompt -->
+  <rect x="40" y="300" width="140" height="40" class="box" fill="#2a1a1a"/>
+  <text x="110" y="322" class="title" text-anchor="middle">Negative Prompt</text>
+  <text x="110" y="334" class="subtitle" text-anchor="middle">Quality guardrails</text>
+
+  <!-- Section: Stage 1 - Scene Generation -->
+  <rect x="230" y="50" width="200" height="180" class="group-border"/>
+  <text x="242" y="42" class="label">STAGE 1 · SCENE GENERATION</text>
+
+  <!-- ComfyUI -->
+  <rect x="250" y="75" width="160" height="44" class="box" fill="#1a2a1a"/>
+  <text x="330" y="95" class="title" text-anchor="middle">ComfyUI Workflow</text>
+  <text x="330" y="109" class="subtitle" text-anchor="middle">Orchestrates Flux pipeline</text>
+
+  <!-- Flux Model -->
+  <rect x="250" y="140" width="160" height="44" class="box" fill="#1a2a2a"/>
+  <text x="330" y="160" class="title" text-anchor="middle">Flux + LoRA</text>
+  <text x="330" y="174" class="subtitle" text-anchor="middle">Text-to-image generation</text>
+
+  <!-- Output: Scene -->
+  <rect x="250" y="200" width="160" height="20" class="box" fill="#222"/>
+  <text x="330" y="214" class="subtitle" text-anchor="middle">Scene with placeholder region</text>
+
+  <!-- Arrows: stage 1 -->
+  <line x1="180" y1="175" x2="250" y2="160" class="arrow-data"/>
+  <line x1="180" y1="255" x2="250" y2="162" class="arrow-blue"/>
+  <line x1="180" y1="320" x2="250" y2="165" class="arrow"/>
+  <line x1="330" y1="119" x2="330" y2="140" class="arrow-data"/>
+  <line x1="330" y1="184" x2="330" y2="200" class="arrow-data"/>
+
+  <!-- Section: Stage 2 - Product Compositing -->
+  <rect x="460" y="50" width="200" height="310" class="group-border"/>
+  <text x="472" y="42" class="label">STAGE 2 · COMPOSITING</text>
+
+  <!-- Product Insertion -->
+  <rect x="480" y="75" width="160" height="44" class="box" fill="#2a1a2a"/>
+  <text x="560" y="95" class="title" text-anchor="middle">Product Insertion</text>
+  <text x="560" y="109" class="subtitle" text-anchor="middle">Place real photo in scene</text>
+
+  <!-- Mask Generation -->
+  <rect x="480" y="140" width="160" height="44" class="box" fill="#2a1a2a"/>
+  <text x="560" y="160" class="title" text-anchor="middle">Mask Generation</text>
+  <text x="560" y="174" class="subtitle" text-anchor="middle">Define blending boundary</text>
+
+  <!-- Inpainting -->
+  <rect x="480" y="210" width="160" height="44" class="box" fill="#1a2a1a"/>
+  <text x="560" y="230" class="title" text-anchor="middle">Flux Inpainting</text>
+  <text x="560" y="244" class="subtitle" text-anchor="middle">Seamless edge blending</text>
+
+  <!-- Post-Processing -->
+  <rect x="480" y="280" width="160" height="60" class="box" fill="#1a1a2a"/>
+  <text x="560" y="300" class="title" text-anchor="middle">Post-Processing</text>
+  <text x="560" y="314" class="subtitle" text-anchor="middle">Color correction · Upscale</text>
+  <text x="560" y="326" class="subtitle" text-anchor="middle">Sharpening · Crop</text>
+
+  <!-- Arrows: stage 2 flow -->
+  <line x1="180" y1="100" x2="480" y2="95" class="arrow-data"/>
+  <line x1="410" y1="210" x2="480" y2="97" class="arrow-data"/>
+  <line x1="560" y1="119" x2="560" y2="140" class="arrow-data"/>
+  <line x1="560" y1="184" x2="560" y2="210" class="arrow-data"/>
+  <line x1="560" y1="254" x2="560" y2="280" class="arrow-data"/>
+
+  <!-- Section: Output -->
+  <rect x="690" y="50" width="170" height="200" class="group-border"/>
+  <text x="702" y="42" class="label">OUTPUT</text>
+
+  <!-- Final Image -->
+  <rect x="710" y="75" width="130" height="50" class="box" fill="#1a2a1a" stroke="#5a6" stroke-width="0.5"/>
+  <text x="775" y="97" class="title" text-anchor="middle">Final Ad Image</text>
+  <text x="775" y="111" class="subtitle" text-anchor="middle">Production-ready</text>
+
+  <!-- Variants -->
+  <rect x="710" y="145" width="130" height="36" class="box" fill="#222"/>
+  <text x="775" y="162" class="title" text-anchor="middle" font-size="9">Size Variants</text>
+  <text x="775" y="174" class="subtitle" text-anchor="middle">1:1 · 4:5 · 16:9 · 9:16</text>
+
+  <!-- CDN -->
+  <rect x="710" y="200" width="130" height="36" class="box" fill="#222"/>
+  <text x="775" y="217" class="title" text-anchor="middle" font-size="9">CDN / Storage</text>
+  <text x="775" y="229" class="subtitle" text-anchor="middle">Azure Blob</text>
+
+  <!-- Arrow: stage 2 → output -->
+  <line x1="640" y1="310" x2="665" y2="310" class="arrow-data"/>
+  <path d="M 665 310 L 665 100 L 710 100" class="arrow-data"/>
+  <line x1="775" y1="125" x2="775" y2="145" class="arrow-data"/>
+  <line x1="775" y1="181" x2="775" y2="200" class="arrow"/>
+
+  <!-- Section: GPU Infrastructure -->
+  <rect x="690" y="280" width="170" height="80" class="group-border"/>
+  <text x="702" y="272" class="label">INFRASTRUCTURE</text>
+
+  <text x="775" y="305" class="title" text-anchor="middle" font-size="9">Azure GPU VMs</text>
+  <text x="775" y="322" class="title" text-anchor="middle" font-size="9">Modal (initial)</text>
+  <text x="775" y="339" class="title" text-anchor="middle" font-size="9">ComfyUI Server</text>
+  <text x="775" y="356" class="subtitle" text-anchor="middle">A100 / H100</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="395" x2="70" y2="395" class="arrow-data"/>
+  <text x="78" y="398" class="subtitle">Image data</text>
+  <line x1="170" y1="395" x2="200" y2="395" class="arrow-blue"/>
+  <text x="208" y="398" class="subtitle">Model weights</text>
+  <line x1="310" y1="395" x2="340" y2="395" class="arrow"/>
+  <text x="348" y="398" class="subtitle">Config / metadata</text>
+</svg>

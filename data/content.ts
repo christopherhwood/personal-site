@@ -35,6 +35,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: "ARC-AGI Research",
     subtitle: "DIFFUSION MODELS / INDEPENDENT",
     description: "Independent research exploring diffusion models for abstract reasoning tasks.",
+    slug: "arc-agi",
   },
   {
     title: "qckfx",
@@ -44,7 +45,7 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     title: "Earlyworm",
-    subtitle: "LANGUAGE LEARNING / iOS",
+    subtitle: "AI LANGUAGE LEARNING / iOS",
     description: "AI-powered language learning iOS app built while still at Meta.",
     slug: "earlyworm",
   },
@@ -116,16 +117,23 @@ export const sections: TimelineSection[] = [
     chapterLabel: "2023\u20132025 \u2014 AI EXPLORATION",
     displayText: "Left Meta to explore what\u2019s possible with AI.",
     bodyTexts: [
-      "While still at Meta, started experimenting with LLMs outside of work hours\u2014built Earlyworm, a language learning iOS app. Left Meta in 2024 to explore what was possible with AI full-time. Created an open-source AI coding agent, worked on Harvey\u2019s legal AI iOS app pre-beta, and built an AI-native ERP extension for building materials distributors.",
+      "While still at Meta, started experimenting with LLMs outside of work hours and built Earlyworm, a language learning iOS app. Left Meta in 2024 to explore what was possible with AI full-time. Created an open-source AI coding agent, worked on Harvey\u2019s legal AI iOS app pre-beta, and built an AI-native ERP extension for building materials distributors.",
       "Did independent research on ARC-AGI exploring diffusion models. Built a Node.js autonomous coding agent, a drag/drop website builder with AI function wiring, an AI-powered frontend component builder, and an ecommerce ad generator.",
     ],
     items: [
       {
         title: "Earlyworm",
-        subtitle: "LANGUAGE LEARNING / iOS",
+        subtitle: "AI LANGUAGE LEARNING / iOS",
         type: "project",
         year: 2023,
         slug: "earlyworm",
+      },
+      {
+        title: "ARC-AGI Research",
+        subtitle: "DIFFUSION MODELS / INDEPENDENT",
+        type: "project",
+        year: 2024,
+        slug: "arc-agi",
       },
       {
         title: "AI Website Builder",
@@ -149,12 +157,6 @@ export const sections: TimelineSection[] = [
         slug: "qckfx-ads",
       },
       {
-        title: "ARC-AGI Research",
-        subtitle: "DIFFUSION MODELS / INDEPENDENT",
-        type: "project",
-        year: 2024,
-      },
-      {
         title: "Emerging Personalized Economy",
         subtitle: "ESSAY / 2023",
         type: "post",
@@ -174,7 +176,7 @@ export const sections: TimelineSection[] = [
     id: "05",
     yearRange: "2021\u201323",
     chapterLabel: "2021\u20132023 \u2014 META ADS & RAYBAN",
-    displayText: "From hypothesis to production.",
+    displayText: "Newsfeed ads, then Rayban Meta.",
     bodyTexts: [
       "Joined the ads team and turned a $1B+ data science opportunity into production, generating over $500M annually with a capital-efficient architecture that bypassed the need for a multi-year backend rebuild. Then moved to the Rayban Meta team for operational excellence and early LLM tooling.",
     ],
@@ -224,7 +226,7 @@ export const sections: TimelineSection[] = [
     id: "03",
     yearRange: "2015\u201318",
     chapterLabel: "2015\u20132018 \u2014 DAYDAYCOOK",
-    displayText: "2.5 years on the iOS team.",
+    displayText: "Shipping to millions across Asia.",
     bodyTexts: [
       "Worked on DayDayCook\u2019s iOS app. We made Apple\u2019s top 10 app list in Hong Kong in 2016 and were featured in the WWDC 2017 video. It was my first time seeing something I worked on reach that many people, and understanding what it takes to ship software that holds up at scale.",
     ],
@@ -263,9 +265,9 @@ export const sections: TimelineSection[] = [
     id: "02",
     yearRange: "2013\u201315",
     chapterLabel: "2013\u20132015 \u2014 NANJING & SHANGHAI",
-    displayText: "Learning Chinese, then started coding.",
+    displayText: "Moved to China, learned to code.",
     bodyTexts: [
-      "Moved to Nanjing to study Chinese, then Shanghai to work. Shanghai was where I really learned to program\u2014the city had an energy that made you want to build things. The combination of being in a new place and having something concrete to work on every day was formative.",
+      "Moved to Nanjing to study Chinese, then Shanghai to work. Shanghai was where I really learned to program. The city had an energy that made you want to build things, and the combination of being in a new place and having something concrete to work on every day was formative.",
     ],
     items: [
       {
@@ -310,6 +312,83 @@ export const sections: TimelineSection[] = [
         year: 2014,
         slug: "chinas-shadow-banking",
       },
+      {
+        title: "\u5173\u4e8e\u7ec4\u6210\u4e00\u79cd\u4e9a\u6d32\u5c01\u95ed\u8d27\u5e01\u533a\uff1a\u4e2d\u56fd\u7684\u89d2\u8272",
+        subtitle: "CHINESE LANGUAGE / INTERNATIONAL RELATIONS",
+        type: "post",
+        year: 2014,
+        slug: "asian-currency-zone",
+      },
+      {
+        title: "US-China Corn Trade Fiasco",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "us-china-corn-trade",
+      },
+      {
+        title: "Mobile Taxi Apps in China",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "mobile-taxi-apps",
+      },
+      {
+        title: "China\u2019s Automobile Industry",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "chinas-automobile-industry",
+      },
+      {
+        title: "Should China\u2019s Auto Industry Be Reformed?",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "chinas-auto-industry-reform",
+      },
+      {
+        title: "China\u2019s PMI Released",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "chinas-pmi",
+      },
+      {
+        title: "What\u2019s Going on with the RMB?",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "whats-going-on-with-rmb",
+      },
+      {
+        title: "Yu\u2019E\u2019Bao and China\u2019s Economy",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "yuebao-china-economy",
+      },
+      {
+        title: "2008\u5e74\u91d1\u878d\u5371\u673a\u540e\uff1a\u4e2d\u7f8e\u623f\u5730\u4ea7\u8c03\u63a7\u653f\u7b56\u6bd4\u8f83",
+        subtitle: "CHINESE LANGUAGE / ECONOMICS",
+        type: "post",
+        year: 2014,
+        slug: "china-us-real-estate-policy",
+      },
+      {
+        title: "\u4e1c\u76df\u5efa\u8bbe\u9762\u4e34\u7684\u6311\u6218\u548c\u524d\u666f",
+        subtitle: "CHINESE LANGUAGE / GEOPOLITICS",
+        type: "post",
+        year: 2014,
+        slug: "asean-challenges",
+      },
+      {
+        title: "Foreign Entry into Chinese Express Delivery",
+        subtitle: "ESSAY / 2014",
+        type: "post",
+        year: 2014,
+        slug: "china-express-delivery",
+      },
     ],
   },
   {
@@ -318,8 +397,8 @@ export const sections: TimelineSection[] = [
     chapterLabel: "~2013 \u2014 VIRGINIA",
     displayText: "Nelson County and UVA.",
     bodyTexts: [
-      "Grew up in Nelson County\u2014a county with less than 15,000 people, 600 in my high school. Valedictorian, all-district golf, basketball state champion. Also played guitar and saxophone in the jazz band.",
-      "Went to University of Virginia and studied international relations and Chinese language. Wrote some papers in Chinese about IR topics that I can share if you\u2019re curious about that phase of my life.",
+      "Grew up in Nelson County, a small county with less than 15,000 people and 600 in my high school. Valedictorian, all-district golf, basketball state champion. Also played guitar and saxophone in the jazz band.",
+      "Went to University of Virginia and studied international relations and Chinese language. Wrote research papers in Chinese on energy security, currency policy, and other IR topics.",
     ],
     items: [
       {
@@ -351,10 +430,11 @@ export const sections: TimelineSection[] = [
         slug: "china-interest-rate-crisis",
       },
       {
-        title: "IR Research Papers",
+        title: "\u81f3\u4e8e\u77f3\u6cb9\u4e2d\u56fd\u4e0e\u4e2d\u4e1c\u7684\u5173\u7cfb",
         subtitle: "CHINESE LANGUAGE / INTERNATIONAL RELATIONS",
-        type: "project",
-        year: 2013,
+        type: "post",
+        year: 2012,
+        slug: "china-middle-east-oil",
       },
     ],
   },

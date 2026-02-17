@@ -26,6 +26,29 @@
     outline: none;
   }
 
+  * {
+    scrollbar-color: rgba(227, 224, 212, 0.15) transparent;
+    scrollbar-width: thin;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgba(227, 224, 212, 0.15);
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(227, 224, 212, 0.3);
+  }
+
   body {
     background-color: var(--color-surface);
     color: var(--color-primary);
@@ -73,13 +96,14 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      padding: 60px 40px;
+      padding: 60px 40px 20px;
       border-right: 1px solid rgba(227, 224, 212, 0.1);
       border-bottom: none;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       z-index: 10;
+      overflow: hidden;
     }
   }
 

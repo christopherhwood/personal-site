@@ -32,6 +32,7 @@ export interface ProjectSection {
   description: string;
   media?: MediaBlock[];
   mediaLayout?: "stacked" | "carousel";
+  tweets?: { id: string; afterParagraph: number }[];
 }
 
 export interface ProjectLink {
@@ -63,6 +64,7 @@ export interface ProjectDetail {
   mediaLayout?: "stacked" | "carousel";
   gallery?: MediaBlock[];
   sections?: ProjectSection[];
+  tweets?: { id: string; afterParagraph: number }[];
 }
 
 const projects: ProjectDetail[] = [
@@ -82,6 +84,13 @@ const projects: ProjectDetail[] = [
       "Network request interception & replay",
       "MCP server for AI agent integration",
       "Screenshot capture at each step",
+    ],
+    asides: [
+      {
+        title: "Light Footprint, Real Complexity",
+        afterParagraph: 1,
+        body: "qckfx is designed for PLG\u2014there\u2019s no SDK to install and no code added to your repo. Any developer can pick it up and start using it without needing to integrate anything into their project. That constraint means the client\u2019s app has to be treated as a complete black box, which drives a **three-part architecture**: a network proxy that intercepts and replays traffic, an XCUITest driver application that controls the simulator from the outside, and a local macOS host app that orchestrates everything. Supporting multiple simulators running concurrently, plus team collaboration and CI integration, makes it more of a **distributed systems problem** than you\u2019d expect from a testing tool.",
+      },
     ],
     githubRepo: "qckfx/qckfx",
     siteUrl: "https://qckfx.com",
@@ -187,13 +196,6 @@ const projects: ProjectDetail[] = [
         label: "Traction",
         aspectRatio: "2442/1030",
         caption: "User growth and engagement metrics.",
-      },
-      {
-        type: "image",
-        src: "/images/projects/earlyworm-architecture.svg",
-        label: "Architecture",
-        aspectRatio: "960/720",
-        caption: "Backend architecture: RSS ingestion, AI processing pipeline, recommendation engine, and API layer on Azure AKS.",
       },
     ],
   },
@@ -680,13 +682,27 @@ result = fn([value])                     // \u2192 "42"
     year: 2024,
     role: "Solo Developer",
     status: "Retired",
-    stack: ["Flux", "ComfyUI", "Python", "Azure GPUs"],
+    stack: ["Flux", "ComfyUI", "Python", "TypeScript", "React", "Azure GPUs"],
     features: [
       "AI product image generation indistinguishable from real photos",
       "Two-stage pipeline: scene generation + product insertion",
       "ComfyUI workflow orchestration",
       "Inpainting for seamless product blending",
       "Used in production by ecommerce companies",
+    ],
+    asides: [
+      {
+        title: "Inference Serving Path",
+        afterParagraph: 1,
+        body: "The two-stage pipeline runs entirely through **ComfyUI workflows** on GPU instances. Stage 1 takes a scene prompt and the product\u2019s fine-tuned **LoRA weights**, generating a scene with a placeholder region where the product will go. Stage 2 composites the **real product photo** into the scene, generates a blending mask around the edges, and runs **Flux inpainting** to seamlessly merge the product into the generated environment. Post-processing handles color correction, upscaling, and sharpening. The pipeline outputs multiple aspect ratios (1:1, 4:5, 16:9, 9:16) for different ad platforms.",
+        image: { src: "/images/projects/qckfx-ads-inference.svg", aspectRatio: "880/420" },
+      },
+      {
+        title: "Fine-Tuning for New Products",
+        afterParagraph: 1,
+        body: "Onboarding a new product starts with **a single product photo**. A preprocessing script chops it into multiple crops and auto-captions each one with an LLM, tagging them with a unique **trigger token** (e.g. *sks_crunchybars*). This generates a full training dataset from one image. A **LoRA fine-tuning** run then trains low-rank adaptation layers on top of the frozen Flux base model, taking ~500\u20131000 steps (~20 minutes on an A100). The resulting weights (~50\u2013100 MB) are stored in a model registry with metadata and validation scores. At inference time, the LoRA is loaded into the ComfyUI pipeline\u2014the trigger token in the scene prompt activates the learned product appearance.",
+        image: { src: "/images/projects/qckfx-ads-training.svg", aspectRatio: "920/440" },
+      },
     ],
     githubRepo: "EarlywormTeam/qckfx-ads",
     repoUrl: "https://github.com/EarlywormTeam/qckfx-ads",
@@ -709,6 +725,86 @@ result = fn([value])                     // \u2192 "42"
       { type: "image", src: "/images/projects/qckfx-ads/image_product_2.jpg", label: "Product shot", aspectRatio: "1/1" },
       { type: "image", src: "/images/projects/qckfx-ads/image_product_3.jpg", label: "Product shot", aspectRatio: "1/1" },
       { type: "image", src: "/images/projects/qckfx-ads/image_product_4.jpg", label: "Product shot", aspectRatio: "1/1" },
+    ],
+  },
+  {
+    slug: "arc-agi",
+    titleLines: ["ARC-AGI", "Research"],
+    subtitle:
+      "Applying diffusion models to abstract reasoning, before anyone else was trying it.",
+    description:
+      "In early July 2024, I spent approximately two weeks applying diffusion models to the ARC-AGI abstract reasoning benchmark. This was my initial machine learning project following fastai\u2019s diffusion courses. I solved one task, came close to solving a second, then moved forward before conducting systematic evaluation.\n\nThe concept originated with a question: given an input-output pair where the output represents complex, unknown transformations of the input, how can you discover those transformations? My first instinct involved Fourier transforms\u2014decomposing unknown transformations into simpler components\u2014but that failed because Fourier analysis decomposes signals into frequency components without discovering input-output mappings.\n\nThe key insight was about diffusion\u2019s forward process. The forward process is fundamentally just a function. Conventionally it\u2019s stochastic Gaussian noise, but nothing requires this. ARC grids are discrete matrices with integer values 0 through 9. By treating outputs as \u201cclean signals\u201d and inputs as \u201ccorrupted signals,\u201d the transformation rule becomes the corruption itself. If a model learns to remove structured, non-random noise, it has learned the underlying function. No one in the ARC community was discussing diffusion at that time\u2014dominant approaches were program synthesis, domain-specific languages, and large language models.",
+    year: 2024,
+    role: "Independent Researcher",
+    status: "Research",
+    stack: ["Python", "PyTorch", "Diffusion Models", "UNet", "Autoencoders"],
+    features: [
+      "Latent diffusion for abstract reasoning",
+      "Learned forward process (non-Gaussian)",
+      "Stochastic search via multi-path denoising",
+      "Branching model ensembles",
+      "Per-task training with heavy augmentation",
+    ],
+    tweets: [
+      { id: "1806436104138297747", afterParagraph: 0 },
+      { id: "1807884670438359072", afterParagraph: 0 },
+    ],
+    links: [
+      { url: "https://www.kaggle.com/code/christopherhwood/arc-agi-embedding", label: "ARC-AGI Embedding (Kaggle)" },
+      { url: "https://www.kaggle.com/code/christopherhwood/notebook92c6e6e661", label: "Latent Diffusion Notebook" },
+      { url: "https://www.kaggle.com/code/christopherhwood/notebook29802a10c4", label: "Clue Giver / Solver Notebook" },
+      { url: "https://www.kaggle.com/code/christopherhwood/arc-agi-merged-embedding", label: "Merged Embedding (Kaggle)" },
+    ],
+    media: [],
+    sections: [
+      {
+        title: "What I Built",
+        description:
+          "ARC grids are single-channel matrices of integers 0\u20139, with height and width varying between 3 and 30. I created a harness that compressed these into standardized 16-channel, 16\u00d716 representations. All diffusion work operated on these embeddings.\n\nThe approach used latent diffusion: an autoencoder learning a latent space from embeddings, then a UNet denoiser treating the input as noisy and predicting the residual to reach the output. Six iterations were necessary to reach a working version. Earlier attempts included deeper autoencoders, bigger latent dimensions, more UNet complexity, second-stage denoising models, and various combinations. Each failure taught something: bigger latents made the denoising problem exponentially harder regardless of autoencoder quality.\n\nThe breakthrough was representational restructuring. Earlier versions collapsed grids into flat 1\u00d71 latent vectors, artificially reshaping them for UNet convolution. The successful version allowed the encoder\u2019s stride-3 convolution to naturally produce 256\u00d73\u00d73 spatial latents, where each of the 9 latent positions corresponded to a 3\u00d73 region of the 9\u00d79 grid. This single change simplified the UNet from 5 levels to 2, dropped loss by an order of magnitude, improved autoencoder loss 100\u00d7, and solved a task.\n\nAbout a week later, I removed the autoencoder entirely, having the UNet predict input-to-output residuals directly in pixel space. For already-solved tasks, the pixel-space version received raw tiled input structurally closer to the answer\u2014yet the latent version performed better despite the pixel version having a head start, suggesting the learned latent space was contributing something meaningful.",
+        media: [
+          {
+            type: "image" as const,
+            src: "/images/projects/arc-agi-latent.svg",
+            label: "Flat vs Spatial Latent",
+            aspectRatio: "880/460",
+            caption: "The critical difference between versions 1\u20135 (flat latent, failed) and version 6 (spatial latent, solved a task).",
+          },
+        ],
+      },
+      {
+        title: "The Clue Giver / Solver Architecture",
+        description:
+          "Alongside the latent diffusion work, I designed a system called the clue giver and solver. The clue giver starts with the clean output image and progressively adds noise, one step at a time, until reaching the noisy input image. At each step, it lays down a clue that a solver can follow\u2014like a maze where the clue giver starts at the exit and leaves a trail of breadcrumbs back to the entrance.\n\nA timestep-conditioned UNet learns to reverse each step. Multiple solvers learn different reversal paths, creating an ensemble. At test time, the single test input goes to every solver, each producing a different candidate output because it learned a different reversal strategy. The most frequently occurring answer is selected.\n\nThe initial clue giver was a convolutional network learning to generate context-aware noise. This proved overengineered. I replaced it with linear interpolation between clean and noisy embeddings, with element-wise sampling from a bounded normal distribution. In early timesteps, the distribution centers near the clean value with a long tail toward the noisy value. In later timesteps, it shifts toward the noisy value, creating a controlled stochastic walk from clean to noisy, with different random seeds producing different paths. Linear interpolation was later replaced with cosine scheduling.",
+        media: [
+          {
+            type: "image" as const,
+            src: "/images/projects/arc-agi-clue-giver.svg",
+            label: "Clue Giver / Solver",
+            aspectRatio: "880/490",
+            caption: "Training generates multiple stochastic paths between clean and noisy. Each solver learns a different reversal strategy. At inference, majority voting selects the consensus answer.",
+          },
+        ],
+      },
+      {
+        title: "The Ideas Behind the Architecture",
+        description:
+          "The most important concept: the clue giver\u2019s stochastic sampling produces different paths from clean to noisy each run. Different solvers train on different sampled paths, internalizing different reversal strategies. This transforms diffusion into a search strategy over possible transformations. Randomness lives in training, not inference. Multiple solvers exploring different strategy space regions performs the same work as random restarts in combinatorial search.\n\nStandard diffusion uses Gaussian noise, but ARC transformations are structured, not random. I explored training a network to learn the noise addition process itself: given a clean embedding and target noisy embedding, learn a noise schedule that incrementally corrupts one into the other. Making the forward process learnable let the model discover transformation structure rather than imposing a noise assumption that doesn\u2019t fit.\n\nI also experimented with branching model ensembles. After 5 epochs of training, the UNet was deep-copied into 3 copies with the first layer of each fork frozen. After 15 more epochs, another fork occurred, ending with 9 models sharing early features but diverging in higher-level strategies. This is adjacent to snapshot ensembles and population-based training but creates a branching tree through weight space where structural freezing ensures forked models agree on low-level features while exploring different high-level strategies.\n\nFinally, I questioned why gradient descent optimizers hadn\u2019t been applied to the diffusion inference process itself. The denoising trajectory iteratively refines an image, structurally similar to iterative parameter optimization. Treating pixel values as parameters being optimized toward a target, techniques like momentum or adaptive learning rates seem applicable. This wasn\u2019t implemented but connects to later work on guided diffusion.",
+        tweets: [{ id: "1846467721997046005", afterParagraph: 0 }],
+        media: [
+          {
+            type: "image" as const,
+            src: "/images/projects/arc-agi-branching.svg",
+            label: "Branching Model Ensemble",
+            aspectRatio: "800/400",
+            caption: "After shared initial training, the model forks into independent copies with frozen early layers. Each fork explores different high-level strategies while agreeing on low-level features.",
+          },
+        ],
+      },
+      {
+        title: "Results & Reflections",
+        description:
+          "The approach solved one task outright and came within two cells of solving a second. On one training example for the second task, the model captured the structural transformation correctly\u2014colors mapped, spatial arrangement preserved, overall pattern right. But on the actual challenge input it was consistently off by two cells. Early convolutional layers in the UNet were losing too much spatial information during downsampling, and the embedding format was fragile\u2014small errors in the embedding space cascaded into incorrect cell values after decoding. These are engineering problems, not conceptual ones.\n\nOver the following year, diffusion for ARC became a real research thread. The ARChitects (ARC Prize 2025, 2nd place) used masked diffusion with 8B parameters. Their soft-masking approach turns every grid position into a partially noisy state, iterating and exploring solution space through stochastic refinement\u2014a family resemblance to the random search over paths idea. Trelis Research found that majority voting over 72 augmented starting points improved scores by 20\u201330%, essentially the stochastic search idea.\n\nThe general direction was sound. Framing ARC as denoising was non-obvious in mid-2024 and proved productive. Per-task training with small models fit within the competition\u2019s compute budget and became the dominant approach. My main concern looking back: convolutions might be too lossy before data reaches attention layers. This was the failure mode on the second task and might be fundamental rather than fixable\u2014but before accepting that, creative workarounds deserve attempts. There\u2019s still an itch to go back, run it properly across the full benchmark, and find out where it actually breaks.",
+      },
     ],
   },
   {
