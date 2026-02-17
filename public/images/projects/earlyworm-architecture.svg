@@ -24,33 +24,33 @@
   <rect x="20" y="60" width="260" height="280" class="group-border"/>
   <text x="32" y="52" class="label">DATA INGESTION</text>
 
-  <!-- RSS Fetcher -->
+  <!-- RSS Fetcher (Node.js) -->
   <rect x="40" y="80" width="220" height="44" class="box" fill="#1a2a1a"/>
   <text x="150" y="100" class="title" text-anchor="middle">RSS Fetcher</text>
-  <text x="150" y="114" class="subtitle" text-anchor="middle">Blue/Green Deploy · Node.js</text>
+  <text x="150" y="114" class="subtitle" text-anchor="middle">Node.js · Blue/Green Deploy</text>
 
-  <!-- Article Processor -->
+  <!-- Article Processor (Node.js) -->
   <rect x="40" y="140" width="220" height="44" class="box" fill="#1a2a1a"/>
   <text x="150" y="160" class="title" text-anchor="middle">Article Processor</text>
-  <text x="150" y="174" class="subtitle" text-anchor="middle">Classification · NER · Embeddings</text>
+  <text x="150" y="174" class="subtitle" text-anchor="middle">Node.js · Fan-out to Python services</text>
 
-  <!-- Sub-services row -->
+  <!-- Sub-services row (Python) -->
   <rect x="40" y="200" width="68" height="36" class="box" fill="#1a1a2a"/>
-  <text x="74" y="218" class="title" text-anchor="middle" font-size="9">Classifier</text>
-  <text x="74" y="228" class="subtitle" text-anchor="middle" font-size="6">17 categories</text>
+  <text x="74" y="216" class="title" text-anchor="middle" font-size="9">Classifier</text>
+  <text x="74" y="228" class="subtitle" text-anchor="middle" font-size="6">Python · 17 cat.</text>
 
   <rect x="116" y="200" width="68" height="36" class="box" fill="#1a1a2a"/>
-  <text x="150" y="218" class="title" text-anchor="middle" font-size="9">NER</text>
-  <text x="150" y="228" class="subtitle" text-anchor="middle" font-size="6">PER/ORG/LOC</text>
+  <text x="150" y="216" class="title" text-anchor="middle" font-size="9">NER</text>
+  <text x="150" y="228" class="subtitle" text-anchor="middle" font-size="6">Python · spaCy</text>
 
   <rect x="192" y="200" width="68" height="36" class="box" fill="#1a1a2a"/>
-  <text x="226" y="218" class="title" text-anchor="middle" font-size="9">Embedder</text>
-  <text x="226" y="228" class="subtitle" text-anchor="middle" font-size="6">OpenAI API</text>
+  <text x="226" y="216" class="title" text-anchor="middle" font-size="9">Embedder</text>
+  <text x="226" y="228" class="subtitle" text-anchor="middle" font-size="6">Python · OpenAI</text>
 
-  <!-- Trends Service -->
-  <rect x="40" y="260" width="220" height="60" class="box" fill="#2a1a2a"/>
+  <!-- Trends Service (Python) -->
+  <rect x="40" y="260" width="220" height="60" class="box" fill="#1a1a2a"/>
   <text x="150" y="280" class="title" text-anchor="middle">Trends Service</text>
-  <text x="150" y="294" class="subtitle" text-anchor="middle">CronJob · Every 6h</text>
+  <text x="150" y="294" class="subtitle" text-anchor="middle">Python · CronJob · Every 6h</text>
   <text x="150" y="306" class="subtitle" text-anchor="middle">TF-IDF Clustering · LDA · TextRank</text>
 
   <!-- Arrows: ingestion flow -->
@@ -80,7 +80,7 @@
   <text x="410" y="234" class="subtitle" text-anchor="middle">Pages · Thumbnails · Summaries</text>
 
   <!-- Redis cluster -->
-  <rect x="330" y="260" width="160" height="60" class="box" fill="#2a1a1a"/>
+  <rect x="330" y="260" width="160" height="60" class="box" fill="#2a2a1a"/>
   <text x="410" y="280" class="title" text-anchor="middle">Redis (9 instances)</text>
   <text x="410" y="294" class="subtitle" text-anchor="middle">DB Cache · Sessions · Rate Limit</text>
   <text x="410" y="306" class="subtitle" text-anchor="middle">Rec Input · Read · RSS Jobs</text>
@@ -94,18 +94,18 @@
   <rect x="540" y="60" width="260" height="180" class="group-border"/>
   <text x="552" y="52" class="label">RECOMMENDATION ENGINE</text>
 
-  <!-- Rec Input -->
-  <rect x="560" y="80" width="220" height="44" class="box" fill="#1a2a2a"/>
+  <!-- Rec Input (Python) -->
+  <rect x="560" y="80" width="220" height="44" class="box" fill="#1a1a2a"/>
   <text x="670" y="100" class="title" text-anchor="middle">Recommendation Input</text>
-  <text x="670" y="114" class="subtitle" text-anchor="middle">CronJob · User Vectors · Preferences</text>
+  <text x="670" y="114" class="subtitle" text-anchor="middle">Python · CronJob · User Vectors</text>
 
-  <!-- Feed Recommender -->
-  <rect x="560" y="140" width="220" height="44" class="box" fill="#1a2a2a"/>
+  <!-- Feed Recommender (Python) -->
+  <rect x="560" y="140" width="220" height="44" class="box" fill="#1a1a2a"/>
   <text x="670" y="160" class="title" text-anchor="middle">Feed Recommender</text>
-  <text x="670" y="174" class="subtitle" text-anchor="middle">Flask · Vector Similarity · Ranking</text>
+  <text x="670" y="174" class="subtitle" text-anchor="middle">Python · Flask · Vector Similarity</text>
 
   <!-- Personalization -->
-  <rect x="560" y="200" width="220" height="24" class="box" fill="#1a2a2a"/>
+  <rect x="560" y="200" width="220" height="24" class="box" fill="#1a1a2a"/>
   <text x="670" y="216" class="subtitle" text-anchor="middle">Content-based + Collaborative Filtering</text>
 
   <!-- Arrows: storage → rec engine -->
@@ -118,12 +118,12 @@
 
   <!-- Section: API Server (center-bottom) -->
   <rect x="220" y="380" width="380" height="180" class="group-border"/>
-  <text x="232" y="372" class="label">API SERVER · NODE.JS / KOA</text>
+  <text x="232" y="372" class="label">API SERVER</text>
 
-  <!-- Server box -->
-  <rect x="240" y="400" width="340" height="44" class="box" fill="#1a1a1a" stroke="#444" stroke-width="0.5"/>
+  <!-- Server box (Node.js) -->
+  <rect x="240" y="400" width="340" height="44" class="box" fill="#1a2a1a"/>
   <text x="410" y="420" class="title" text-anchor="middle">Main Server</text>
-  <text x="410" y="434" class="subtitle" text-anchor="middle">Blue/Green · Port 80 · Application Gateway</text>
+  <text x="410" y="434" class="subtitle" text-anchor="middle">Node.js · Koa · Blue/Green · App Gateway</text>
 
   <!-- API routes row -->
   <rect x="240" y="460" width="80" height="30" class="box" fill="#222"/>
@@ -139,13 +139,13 @@
   <text x="526" y="477" class="subtitle" text-anchor="middle" font-size="7">Search</text>
 
   <!-- Supporting services row -->
-  <rect x="240" y="510" width="105" height="30" class="box" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+  <rect x="240" y="510" width="105" height="30" class="box" fill="#1a2a1a"/>
   <text x="292" y="528" class="subtitle" text-anchor="middle">Email Service</text>
 
-  <rect x="355" y="510" width="105" height="30" class="box" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+  <rect x="355" y="510" width="105" height="30" class="box" fill="#1a2a1a"/>
   <text x="407" y="528" class="subtitle" text-anchor="middle">Notifications</text>
 
-  <rect x="470" y="510" width="105" height="30" class="box" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+  <rect x="470" y="510" width="105" height="30" class="box" fill="#1a2a1a"/>
   <text x="522" y="528" class="subtitle" text-anchor="middle">Logging</text>
 
   <!-- Arrows: storage → server -->
@@ -208,8 +208,21 @@
   <text x="885" y="182" class="title" text-anchor="middle" font-size="9">Blue/Green</text>
 
   <!-- Legend -->
-  <line x1="40" y1="690" x2="70" y2="690" class="arrow-data"/>
-  <text x="78" y="693" class="subtitle">Data flow</text>
-  <line x1="160" y1="690" x2="190" y2="690" class="arrow"/>
-  <text x="198" y="693" class="subtitle">Service dependency</text>
+  <rect x="40" y="682" width="12" height="12" rx="2" fill="#1a2a1a"/>
+  <text x="58" y="692" class="subtitle">Node.js</text>
+
+  <rect x="120" y="682" width="12" height="12" rx="2" fill="#1a1a2a"/>
+  <text x="138" y="692" class="subtitle">Python</text>
+
+  <rect x="195" y="682" width="12" height="12" rx="2" fill="#2a2a1a"/>
+  <text x="213" y="692" class="subtitle">Storage</text>
+
+  <rect x="275" y="682" width="12" height="12" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+  <text x="293" y="692" class="subtitle">External</text>
+
+  <line x1="370" y1="688" x2="400" y2="688" class="arrow-data"/>
+  <text x="408" y="692" class="subtitle">Data flow</text>
+
+  <line x1="480" y1="688" x2="510" y2="688" class="arrow"/>
+  <text x="518" y="692" class="subtitle">Dependency</text>
 </svg>

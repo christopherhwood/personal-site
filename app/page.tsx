@@ -8,11 +8,11 @@ import { useFilter } from "@/hooks/useFilter";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { sections } from "@/data/content";
 
+const SECTION_IDS = sections.map((s) => s.id);
+
 export default function Home() {
   const { filter, setFilter } = useFilter();
-  const { activeSection, progress } = useActiveSection(
-    sections.map((s) => s.id)
-  );
+  const { activeSection, progress, isReady } = useActiveSection(SECTION_IDS);
 
   return (
     <>
@@ -39,7 +39,11 @@ export default function Home() {
         </defs>
       </svg>
       <div className="site-wrapper">
-        <Sidebar activeSection={activeSection} progress={progress} />
+        <Sidebar
+          activeSection={activeSection}
+          progress={progress}
+          isReady={isReady}
+        />
         <main>
           <FilterNav filter={filter} setFilter={setFilter} />
           <ContentStream sections={sections} filter={filter} />

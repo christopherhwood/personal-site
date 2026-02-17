@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useRef, useCallback } from "react";
 
+let lastX = 0;
+let lastY = 0;
+
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const outlineRef = useRef<HTMLDivElement>(null);
@@ -10,6 +13,9 @@ export function CustomCursor() {
     const dot = dotRef.current;
     const outline = outlineRef.current;
     if (!dot || !outline) return;
+
+    lastX = e.clientX;
+    lastY = e.clientY;
 
     if (!initialized.current) {
       initialized.current = true;
@@ -28,10 +34,21 @@ export function CustomCursor() {
     if (window.matchMedia("(max-width: 900px)").matches) return;
     if ("ontouchstart" in window) return;
 
+    if (document.body.classList.contains("cursor-visible")) {
+      initialized.current = true;
+      const dot = dotRef.current;
+      const outline = outlineRef.current;
+      if (dot && outline) {
+        dot.style.left = `${lastX}px`;
+        dot.style.top = `${lastY}px`;
+        outline.style.left = `${lastX}px`;
+        outline.style.top = `${lastY}px`;
+      }
+    }
+
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      document.body.classList.remove("cursor-visible");
     };
   }, [handleMouseMove]);
 

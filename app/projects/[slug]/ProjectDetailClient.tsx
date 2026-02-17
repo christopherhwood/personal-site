@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
 import type { ProjectDetail, MediaBlock, ProjectAside } from "@/data/projects";
+import { BackLink } from "@/components/BackLink";
 
 function MediaRenderer({ block, className }: { block: MediaBlock; className?: string }) {
   const base = className || "w-full rounded border border-primary/10";
@@ -256,12 +256,10 @@ export function ProjectDetailClient({
   project: ProjectDetail;
   starsMap?: Record<string, number>;
 }) {
-  const router = useRouter();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const placeholderRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const backRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const serifRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const monoRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -275,18 +273,13 @@ export function ProjectDetailClient({
     const cappedScroll = Math.min(window.scrollY, COLLAPSE_DISTANCE);
 
     const header = headerRef.current;
-    const back = backRef.current;
     const title = titleRef.current;
     const meta = metaRef.current;
     const content = contentRef.current;
-    if (!header || !back || !title || !meta || !content) return;
+    if (!header || !title || !meta || !content) return;
 
     header.style.paddingTop = `${lerp(120, 20, t)}px`;
     header.style.paddingBottom = `${lerp(80, 20, t)}px`;
-
-    back.style.opacity = `${1 - t}`;
-    back.style.marginBottom = `${lerp(60, 0, t)}px`;
-    back.style.pointerEvents = t > 0.8 ? "none" : "auto";
 
     title.style.fontSize = `${lerp(5, 1.5, t)}rem`;
 
@@ -324,17 +317,14 @@ export function ProjectDetailClient({
         pt: header.style.paddingTop,
         pb: header.style.paddingBottom,
         fs: titleRef.current?.style.fontSize || "",
-        mb: backRef.current?.style.marginBottom || "",
       };
       header.style.paddingTop = "20px";
       header.style.paddingBottom = "20px";
       if (titleRef.current) titleRef.current.style.fontSize = "1.5rem";
-      if (backRef.current) backRef.current.style.marginBottom = "0px";
       const collapsedHeight = header.offsetHeight;
       header.style.paddingTop = saved.pt;
       header.style.paddingBottom = saved.pb;
       if (titleRef.current) titleRef.current.style.fontSize = saved.fs;
-      if (backRef.current) backRef.current.style.marginBottom = saved.mb;
 
       const totalShrinkage = initialHeaderHeight.current - collapsedHeight;
       const finalOffset = COLLAPSE_DISTANCE - totalShrinkage;
@@ -351,6 +341,8 @@ export function ProjectDetailClient({
 
   return (
     <div ref={wrapperRef}>
+      <BackLink />
+
       {/* Fixed collapsing header */}
       <header
         ref={headerRef}
@@ -362,18 +354,6 @@ export function ProjectDetailClient({
           paddingRight: "10%",
         }}
       >
-        <div
-          ref={backRef}
-          style={{ opacity: 1, marginBottom: "60px" }}
-        >
-          <button
-            onClick={() => router.back()}
-            className="font-mono text-[0.75rem] text-muted hover:text-primary transition-colors inline-flex items-center gap-2"
-          >
-            <span>&larr;</span> Back
-          </button>
-        </div>
-
         <h1
           ref={titleRef}
           className="relative leading-[1.1] tracking-[-0.02em]"
@@ -492,12 +472,14 @@ export function ProjectDetailClient({
                 Screenshots
               </div>
               <div
-                className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
+                className="flex gap-4 overflow-x-auto overflow-y-hidden pb-4 snap-x snap-mandatory"
                 style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(227,224,212,0.2) transparent" }}
               >
                 {project.media.map((block, i) => (
-                  <div key={i} className="flex-none snap-start" style={{ height: "420px" }}>
-                    <MediaRenderer block={block} className="h-full w-auto rounded border border-primary/10" />
+                  <div key={i} className="flex-none snap-start">
+                    <div style={{ height: "420px" }}>
+                      <MediaRenderer block={block} className="h-full w-auto rounded border border-primary/10" />
+                    </div>
                     <p className="font-mono text-[0.65rem] text-muted mt-2">
                       {block.label}
                     </p>
@@ -525,7 +507,43 @@ export function ProjectDetailClient({
             </div>
           )}
 
-          {project.gallery && project.gallery.length > 0 && (
+          {project.gallery && project.gallery.length > 0 && project.slug === "earlyworm" && (
+            <div className="mt-16">
+              <div className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted mb-4">
+                Gallery
+              </div>
+              {/* Video left, reddit + review + traction stacked right */}
+              <div className="grid grid-cols-1 desktop:grid-cols-2 gap-4">
+                <div>
+                  <MediaRenderer block={project.gallery[0]} className="w-full rounded border border-primary/10" />
+                  {project.gallery[0].caption && (
+                    <p className="font-mono text-[0.65rem] text-muted mt-2">{project.gallery[0].caption}</p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-4 justify-center">
+                  {project.gallery.slice(1, 4).map((block, i) => (
+                    <div key={i}>
+                      <MediaRenderer block={block} className="w-full rounded border border-primary/10" />
+                      {block.caption && (
+                        <p className="font-mono text-[0.65rem] text-muted mt-2">{block.caption}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Architecture full width */}
+              {project.gallery[4] && (
+                <div className="mt-4">
+                  <MediaRenderer block={project.gallery[4]} className="w-full rounded border border-primary/10" />
+                  {project.gallery[4].caption && (
+                    <p className="font-mono text-[0.65rem] text-muted mt-2">{project.gallery[4].caption}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {project.gallery && project.gallery.length > 0 && project.slug !== "earlyworm" && (
             <div className="mt-16">
               <div className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted mb-4">
                 Gallery

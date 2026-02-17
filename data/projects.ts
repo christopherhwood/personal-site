@@ -106,7 +106,7 @@ const projects: ProjectDetail[] = [
     year: 2023,
     role: "Founder",
     status: "Retired",
-    stack: ["Swift", "UIKit", "Terraform", "Kubernetes", "Azure AKS", "OpenAI API", "Milvus"],
+    stack: ["Swift", "UIKit", "Node.js", "Python", "Terraform", "Kubernetes", "Azure AKS", "OpenAI API", "Milvus"],
     features: [
       "AI-rewritten articles matched to your proficiency level",
       "Recommendation engine with OpenAI embeddings + Milvus",

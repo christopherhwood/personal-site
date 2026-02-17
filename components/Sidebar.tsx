@@ -1,41 +1,54 @@
 "use client";
 import { sections } from "@/data/content";
-import { useEffect, useRef, useCallback } from "react";
+import { useLayoutEffect, useRef, useCallback, useEffect, useState } from "react";
 
 interface Props {
   activeSection: string;
   progress: number;
+  isReady: boolean;
 }
 
-export function Sidebar({ activeSection, progress }: Props) {
+export function Sidebar({ activeSection, progress, isReady }: Props) {
   const navRef = useRef<HTMLUListElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const prevSection = useRef(activeSection);
+  const hasPositioned = useRef(false);
+  const [enableTextTransitions, setEnableTextTransitions] = useState(false);
 
   const updateBar = useCallback(() => {
-    if (!navRef.current || !barRef.current) return;
+    if (!isReady || !navRef.current || !barRef.current) return;
     const links = navRef.current.querySelectorAll<HTMLLIElement>(":scope > li");
     const activeIndex = sections.findIndex((s) => s.id === activeSection);
     if (activeIndex < 0 || !links[activeIndex]) return;
 
     const li = links[activeIndex];
     const bar = barRef.current;
-    const sectionChanged = prevSection.current !== activeSection;
+    const sectionChanged =
+      hasPositioned.current && prevSection.current !== activeSection;
 
     if (sectionChanged) {
       bar.style.transition = "top 200ms cubic-bezier(0.16, 1, 0.3, 1), height 200ms cubic-bezier(0.16, 1, 0.3, 1)";
-      prevSection.current = activeSection;
     } else {
       bar.style.transition = "none";
     }
 
     bar.style.top = `${li.offsetTop}px`;
     bar.style.height = `${li.offsetHeight * progress}px`;
-  }, [activeSection, progress]);
+    prevSection.current = activeSection;
+    hasPositioned.current = true;
+  }, [activeSection, progress, isReady]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     updateBar();
   }, [updateBar]);
+
+  useEffect(() => {
+    if (!isReady) return;
+    const raf = requestAnimationFrame(() => {
+      setEnableTextTransitions(true);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [isReady]);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -56,15 +69,19 @@ export function Sidebar({ activeSection, progress }: Props) {
         <ul ref={navRef} className="list-none relative">
           <div
             ref={barRef}
-            className="absolute left-[-20px] top-0 w-[2px] bg-gradient-to-b from-primary to-transparent rounded-[2px]"
+            className={`absolute left-[-20px] top-0 w-[2px] bg-gradient-to-b from-primary to-transparent rounded-[2px] ${
+              isReady ? "opacity-100" : "opacity-0"
+            }`}
           />
           {sections.map((section) => {
-            const isActive = activeSection === section.id;
+            const isActive = isReady && activeSection === section.id;
             return (
               <li key={section.id} className="mb-3 relative">
                 <button
                   onClick={() => scrollTo(section.id)}
-                  className={`font-mono text-[0.8rem] text-primary transition-opacity duration-300 text-left hover:opacity-80 ${
+                  className={`font-mono text-[0.8rem] text-primary text-left hover:opacity-80 ${
+                    enableTextTransitions ? "transition-opacity duration-300" : ""
+                  } ${
                     isActive ? "opacity-100" : "opacity-30"
                   }`}
                 >

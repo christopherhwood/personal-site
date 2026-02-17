@@ -4,7 +4,7 @@ import { GrainOverlay } from "@/components/GrainOverlay";
 import { CustomCursor } from "@/components/CustomCursor";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import Link from "next/link";
-import { BackLink } from "./BackLink";
+import { BackLink } from "@/components/BackLink";
 import type { Metadata } from "next";
 import type { ContentBlock } from "@/data/posts";
 
@@ -106,7 +106,9 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
 
             <div className="mt-10">
-              <BackLink />
+              <BackLink className="font-mono text-primary/60 text-[0.8rem] hover:text-primary transition-colors">
+                &larr; Back to Stream
+              </BackLink>
             </div>
 
             {post.aboutText && (
