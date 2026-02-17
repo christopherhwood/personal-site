@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { markHomeRestorePending } from "@/lib/homeState";
 
 interface BackLinkProps {
@@ -8,11 +9,13 @@ interface BackLinkProps {
 }
 
 export function BackLink({ className, children }: BackLinkProps) {
+  const router = useRouter();
+
   return (
     <button
       onClick={() => {
         markHomeRestorePending();
-        window.location.assign("/");
+        router.push("/", { scroll: false });
       }}
       className={
         className ??
