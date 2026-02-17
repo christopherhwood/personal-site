@@ -168,6 +168,14 @@ export function Sidebar({ activeSection, progress, isReady }: Props) {
               Resume ↗
             </a>
           </li>
+          <li className="mt-3">
+            <a
+              href="/press"
+              className="font-mono text-[0.8rem] text-primary transition-opacity duration-300 hover:opacity-80 opacity-50"
+            >
+              Press ↗
+            </a>
+          </li>
         </ul>
       </nav>
 
