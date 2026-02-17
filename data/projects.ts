@@ -69,6 +69,50 @@ export interface ProjectDetail {
 
 const projects: ProjectDetail[] = [
   {
+    slug: "slate-tui",
+    titleLines: ["Slate TUI"],
+    subtitle:
+      "Terminal user interface for Random Labs\u2019 AI coding agent Slate.",
+    description:
+      "Built the terminal user interface for Slate, Random Labs\u2019 AI coding agent. It\u2019s an Ink app\u2014React rendering to the terminal\u2014which made it possible to build a rich, interactive experience with familiar component patterns.\n\nThe features I\u2019m most proud of are the worktree support and its UI, and the session switching with user message history. Worktree support lets you run multiple agents in parallel across different git worktrees, each with its own isolated context. Session switching lets you jump between past conversations and pick up where you left off, with full message history preserved.\n\nLaunched in late 2025.",
+    year: 2025,
+    role: "Contract Developer",
+    status: "Shipped",
+    stack: ["TypeScript", "React", "Ink", "Node.js"],
+    features: [
+      "Git worktree support with parallel agent sessions",
+      "Session switching with full message history",
+      "Rich terminal UI built with React and Ink",
+    ],
+    siteUrl: "https://randomlabs.ai",
+    siteLabel: "randomlabs.ai",
+    media: [],
+  },
+  {
+    slug: "harvey-ios",
+    titleLines: ["Harvey iOS"],
+    subtitle:
+      "iOS app for Harvey, the AI-powered legal research platform.",
+    description:
+      "Built Harvey\u2019s iOS app alongside one other developer. My focus was on UI polish, performance improvements, and building the design system. Also added several features across the app.\n\nThe design system work involved establishing reusable component patterns and ensuring visual consistency across the app. Performance improvements targeted key interaction paths to make the experience feel responsive and native.\n\nLaunched to GA in early 2026.",
+    year: 2025,
+    role: "Contract Developer",
+    status: "Shipped",
+    stack: ["Swift", "SwiftUI", "iOS"],
+    features: [
+      "UI polish and design system",
+      "Performance improvements",
+      "Feature development",
+    ],
+    siteUrl: "https://apps.apple.com/us/app/harvey-ai/id6743734610",
+    siteLabel: "App Store",
+    links: [
+      { url: "https://www.harvey.ai", label: "harvey.ai" },
+      { url: "https://www.harvey.ai/blog/mobile-voice-announcement", label: "Mobile Launch Post" },
+    ],
+    media: [],
+  },
+  {
     slug: "qckfx",
     titleLines: ["qckfx"],
     subtitle: "Record-and-replay UI testing for iOS apps, driven by MCP.",

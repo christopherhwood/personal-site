@@ -82,6 +82,20 @@ export const sections: TimelineSection[] = [
         slug: "agent-sdk",
       },
       {
+        title: "Slate TUI",
+        subtitle: "CONTRACT / RANDOM LABS",
+        type: "project",
+        year: 2025,
+        slug: "slate-tui",
+      },
+      {
+        title: "Harvey iOS",
+        subtitle: "CONTRACT / HARVEY AI",
+        type: "project",
+        year: 2025,
+        slug: "harvey-ios",
+      },
+      {
         title: "Node.js Debugging MCP",
         subtitle: "MCP SERVER / DEVELOPER TOOLS",
         type: "project",
@@ -117,7 +131,7 @@ export const sections: TimelineSection[] = [
     chapterLabel: "2023\u20132025 \u2014 AI EXPLORATION",
     displayText: "Left Meta to explore what\u2019s possible with AI.",
     bodyTexts: [
-      "While still at Meta, started experimenting with LLMs outside of work hours and built Earlyworm, a language learning iOS app. Left Meta in 2024 to explore what was possible with AI full-time. Created an open-source AI coding agent, worked on Harvey\u2019s legal AI iOS app pre-beta, and built an AI-native ERP extension for building materials distributors.",
+      "While still at Meta, started experimenting with LLMs outside of work hours and built Earlyworm, a language learning iOS app. Left Meta in 2024 to explore what was possible with AI full-time. Created an open-source AI coding agent and built an AI-native ERP extension for building materials distributors.",
       "Did independent research on ARC-AGI exploring diffusion models. Built a Node.js autonomous coding agent, a drag/drop website builder with AI function wiring, an AI-powered frontend component builder, and an ecommerce ad generator.",
     ],
     items: [
@@ -178,7 +192,7 @@ export const sections: TimelineSection[] = [
     chapterLabel: "2021\u20132023 \u2014 META ADS & RAYBAN",
     displayText: "Newsfeed ads, then Rayban Meta.",
     bodyTexts: [
-      "Joined the ads team and turned a $1B+ data science opportunity into production, generating over $500M annually with a capital-efficient architecture that bypassed the need for a multi-year backend rebuild. Then moved to the Rayban Meta team for operational excellence and early LLM tooling.",
+      "Shipped a newsfeed ads project that had been stuck in data science for years, using a lightweight architecture that avoided a full backend rebuild. Then moved to the Rayban Meta team, where I focused on operational excellence and early LLM tooling.",
     ],
     items: [
       {
