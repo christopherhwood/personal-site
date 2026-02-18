@@ -775,7 +775,7 @@ result = fn([value])                     // \u2192 "42"
     slug: "arc-agi",
     titleLines: ["ARC-AGI", "Research"],
     subtitle:
-      "Applying diffusion models to abstract reasoning, before anyone else was trying it.",
+      "Applying diffusion models to abstract reasoning.",
     description:
       "In early July 2024, I spent approximately two weeks applying diffusion models to the ARC-AGI abstract reasoning benchmark. This was my initial machine learning project following fastai\u2019s diffusion courses. I solved one task, came close to solving a second, then moved forward before conducting systematic evaluation.\n\nThe concept originated with a question: given an input-output pair where the output represents complex, unknown transformations of the input, how can you discover those transformations? My first instinct involved Fourier transforms\u2014decomposing unknown transformations into simpler components\u2014but that failed because Fourier analysis decomposes signals into frequency components without discovering input-output mappings.\n\nThe key insight was about diffusion\u2019s forward process. The forward process is fundamentally just a function. Conventionally it\u2019s stochastic Gaussian noise, but nothing requires this. ARC grids are discrete matrices with integer values 0 through 9. By treating outputs as \u201cclean signals\u201d and inputs as \u201ccorrupted signals,\u201d the transformation rule becomes the corruption itself. If a model learns to remove structured, non-random noise, it has learned the underlying function. No one in the ARC community was discussing diffusion at that time\u2014dominant approaches were program synthesis, domain-specific languages, and large language models.",
     year: 2024,
@@ -932,11 +932,14 @@ result = fn([value])                     // \u2192 "42"
     year: 2017,
     role: "iOS Team Lead",
     status: "Shipped",
-    stack: ["Objective-C", "Swift", "JavaScript", "UIKit", "WatchKit", "tvOS", "iMessage Extensions"],
+    stack: ["Objective-C", "Swift", "JavaScript", "UIKit", "WatchKit", "tvOS", "iMessage Extensions", "StoreKit", "WeChat Pay", "Alipay"],
     features: [
       "iPhone + iPad universal app with millions of downloads",
       "Custom video player with picture-in-picture playback",
-      "Ecommerce with flash sales and countdown timers",
+      "Ecommerce with WeChat Pay, Alipay, flash sales, and countdown timers",
+      "Per-course in-app purchases for locked video and recipe content",
+      "Ecommerce livestreaming with real-time comment streaming at scale",
+      "iPad POS app for cooking class sales, deployed to 10+ retail stores",
       "iMessage app with recipe sharing and stickers",
       "Apple TV app with 3,000+ recipe library",
       "Apple Watch app with recipe carousel",
@@ -970,7 +973,7 @@ result = fn([value])                     // \u2192 "42"
       {
         title: "iPhone + iPad App",
         description:
-          "The iPhone/iPad universal application is the core of the DayDayCook iOS experience. As team lead, I led development efforts on the app\u2019s custom video player, recipe page, ecommerce homepage, and many other features.\n\nThe video player supports picture-in-picture so users can keep watching while scrolling through recipes, quick sharing, recipe step overlays, synchronized recipe step alert popovers, a shortcut button to enter the comments section, and a fully customized user interface. The recipe page includes ingredients, cooking steps, recommended recipes, tips, and comments. The app also hosts flash sales and extended sales sections with countdown timers, a unique profile page with custom UI components, and interactive features like photo competitions and surveys.",
+          "The iPhone/iPad universal application is the core of the DayDayCook iOS experience. As team lead, I led development efforts on the app\u2019s custom video player, recipe page, ecommerce homepage, and many other features.\n\nThe video player supports picture-in-picture so users can keep watching while scrolling through recipes, quick sharing, recipe step overlays, synchronized recipe step alert popovers, a shortcut button to enter the comments section, and a fully customized user interface. The recipe page includes ingredients, cooking steps, recommended recipes, tips, and comments. The app also hosts flash sales and extended sales sections with countdown timers, with WeChat Pay and Alipay integrated for checkout. The app includes a unique profile page with custom UI components, and interactive features like photo competitions and surveys.",
         mediaLayout: "carousel",
         media: [
           { type: "image", src: "/images/projects/daydaycook/iphone-1.png", label: "Cooking Course Page (Paid Content)", aspectRatio: "9/16" },
@@ -987,6 +990,34 @@ result = fn([value])                     // \u2192 "42"
           { type: "image", src: "/images/projects/daydaycook/iphone-interactive.png", label: "User Voting Feature", aspectRatio: "9/16" },
           { type: "image", src: "/images/projects/daydaycook/iphone-interactive-2.png", label: "User Comments with Image Gallery", aspectRatio: "9/16" },
         ],
+      },
+      {
+        title: "Paid Courses",
+        description:
+          "DayDayCook sold video cooking courses through the app using Apple\u2019s in-app purchase system. Each course was priced individually, and once purchased, the video lessons and associated recipe content were permanently unlocked for that user.",
+        mediaLayout: "carousel",
+        media: [],
+      },
+      {
+        title: "Ecommerce Livestreaming",
+        description:
+          "We built a livestreaming feature as an ecommerce channel \u2014 live video broadcasts used to sell products and advertise for brand partners. At peak, the feature handled thousands of simultaneous live connections and thousands of comments per minute. The core challenge was keeping the app stable and responsive on low-memory devices under that sustained load while maintaining smooth video playback and real-time comment rendering.",
+        mediaLayout: "carousel",
+        media: [],
+      },
+      {
+        title: "Recipe Page Architecture",
+        description:
+          "The recipe detail page was the core of the app and a constant target for new features \u2014 header, ingredients, cooking steps with images, recommended recipes, ecommerce listings, user comments, and more. The same page was reused for events and other content types that shared some sections but not others, and certain sections were absent in specific regions.\n\nOriginally a single monolithic ViewController, it grew increasingly difficult to maintain. Calculating section offsets was fragile when sections could be conditionally absent, and any change risked breaking scroll positioning or section visibility across the different content configurations.\n\nThe page also pulled data from multiple services, so responses arrived at different times. Without proper diffing, this caused two failure modes: displaying inconsistent intermediate states while waiting on slower responses, and reloading the entire view when a new response arrived \u2014 causing the page to jump even when only one section needed to be inserted or refreshed.\n\nI re-architected it as a modular section tree: sections contain sub-sections, all the way down to individual views, each self-contained and responsible for its own sizing. The tree could be diffed, so when new data arrived only the affected sections were inserted or updated \u2014 the rest of the page stayed stable. It also eliminated a whole class of crashes from data source and collection view inconsistencies, since the diffing handled batch updates correctly. This eliminated the global offset calculations, made sections trivially addable or removable, and extended naturally to complex sub-layouts \u2014 ingredient rows, for example, had previously required manual height calculation across the whole section.\n\nThe architecture proved general enough that we adopted it for every collection and table view in the app, significantly reducing bugs and engineering churn. The approach turned out to be independently similar to IGListKit, which was under development around the same time.",
+        mediaLayout: "carousel",
+        media: [],
+      },
+      {
+        title: "iPad POS",
+        description:
+          "To support DayDayCook\u2019s offline retail expansion, I led development of an iPad point-of-sale application deployed across 10+ physical stores. The app handled customer sign-up, cooking class purchases \u2014 with WeChat Pay and Alipay integrated for payment \u2014 and class attendance tracking, so store staff could see which classes a customer had purchased and how many sessions remained.",
+        mediaLayout: "carousel",
+        media: [],
       },
       {
         title: "iMessage App",
